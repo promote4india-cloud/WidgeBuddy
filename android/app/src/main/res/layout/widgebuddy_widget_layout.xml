@@ -15,7 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="row"
+        android:orientation="horizontal"
         android:gravity="center_vertical">
 
         <TextView
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="row"
+        android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="8dp">
 
@@ -92,7 +92,7 @@
         android:id="@+id/widget_forecast_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="row"
+        android:orientation="horizontal"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
         android:weightSum="3">
