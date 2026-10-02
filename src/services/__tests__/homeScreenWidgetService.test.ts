@@ -158,4 +158,122 @@ describe('HomeScreenWidgetService', () => {
     const list = await homeScreenWidgetService.getAvailableWidgetsList();
     expect(Array.isArray(list)).toBe(true);
   });
+
+  it('correctly creates polymorphic glance summary for task widget', async () => {
+    const taskWidget: DeclarativeWidgetDefinition = {
+      id: 'task-list',
+      displayName: 'My Tasks',
+      category: 'tasks',
+      connectorTypes: ['todoist'],
+      configFields: [],
+      supportedSizes: ['medium'],
+      layouts: {
+        medium: {
+          root: { type: 'container', id: 'r', children: [] },
+        },
+      },
+    };
+
+    const taskItems: UniversalItem[] = [
+      {
+        id: 't1',
+        provider: 'todoist',
+        updatedAt: new Date().toISOString(),
+        type: 'task',
+        title: 'Complete project proposal',
+        status: 'pending',
+        priority: 'high',
+        project: 'Work',
+      },
+      {
+        id: 't2',
+        provider: 'todoist',
+        updatedAt: new Date().toISOString(),
+        type: 'task',
+        title: 'Review team PRs',
+        status: 'completed',
+      },
+    ];
+
+    const payload = await homeScreenWidgetService.setActiveHomeScreenWidget(
+      taskWidget,
+      taskItems,
+    );
+
+    expect(payload.glanceSummary?.widgetType).toBe('task');
+    expect(payload.glanceSummary?.title).toBe('My Tasks');
+    expect(payload.glanceSummary?.primaryText).toBe('1 pending task');
+    expect(payload.glanceSummary?.secondaryText).toBe('Next: Complete project proposal');
+    expect(payload.glanceSummary?.listItems).toHaveLength(2);
+    expect(payload.glanceSummary?.listItems?.[0].title).toBe('Complete project proposal');
+    expect(payload.glanceSummary?.listItems?.[0].isDone).toBe(false);
+    expect(payload.glanceSummary?.listItems?.[1].isDone).toBe(true);
+  });
+
+  it('correctly creates polymorphic glance summary for calendar widget', async () => {
+    const calendarWidget: DeclarativeWidgetDefinition = {
+      id: 'calendar-list',
+      displayName: 'Daily Schedule',
+      category: 'calendar',
+      connectorTypes: ['google_calendar'],
+      configFields: [],
+      supportedSizes: ['medium'],
+      layouts: {
+        medium: {
+          root: { type: 'container', id: 'r', children: [] },
+        },
+      },
+    };
+
+    const calendarItems: UniversalItem[] = [
+      {
+        id: 'c1',
+        provider: 'google_calendar',
+        updatedAt: new Date().toISOString(),
+        type: 'calendar_event',
+        title: 'Team Standup',
+        startAt: '2026-10-02T10:00:00.000Z',
+        endAt: '2026-10-02T10:30:00.000Z',
+        isAllDay: false,
+        location: 'Zoom',
+      },
+    ];
+
+    const payload = await homeScreenWidgetService.setActiveHomeScreenWidget(
+      calendarWidget,
+      calendarItems,
+    );
+
+    expect(payload.glanceSummary?.widgetType).toBe('calendar');
+    expect(payload.glanceSummary?.title).toBe('Daily Schedule');
+    expect(payload.glanceSummary?.primaryText).toBe('Team Standup');
+    expect(payload.glanceSummary?.listItems).toHaveLength(1);
+    expect(payload.glanceSummary?.listItems?.[0].meta).toBe('Zoom');
+  });
+
+  it('correctly creates polymorphic glance summary for clock widget', async () => {
+    const clockWidget: DeclarativeWidgetDefinition = {
+      id: 'clock',
+      displayName: 'Digital Clock',
+      category: 'clock',
+      connectorTypes: [],
+      configFields: [],
+      supportedSizes: ['small', 'medium'],
+      layouts: {
+        medium: {
+          root: { type: 'container', id: 'r', children: [] },
+        },
+      },
+    };
+
+    const payload = await homeScreenWidgetService.setActiveHomeScreenWidget(
+      clockWidget,
+      [],
+    );
+
+    expect(payload.glanceSummary?.widgetType).toBe('clock');
+    expect(payload.glanceSummary?.title).toBe('Digital Clock');
+    expect(payload.glanceSummary?.timeText).toBeDefined();
+    expect(payload.glanceSummary?.dateText).toBeDefined();
+  });
 });

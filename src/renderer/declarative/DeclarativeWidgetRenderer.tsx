@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 16,
     padding: 12,
-    backgroundColor: '#1e293b',
+    backgroundColor: 'transparent',
     overflow: 'hidden',
   },
   errorCard: {

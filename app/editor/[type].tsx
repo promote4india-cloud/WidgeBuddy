@@ -31,6 +31,7 @@ import {
 import { AddToHomeScreenModal } from '@/ui/AddToHomeScreenModal';
 import { getWidgetRepository } from '@/repositories';
 import { validateWidgetDefinition } from '@/widgets/declarative/validation';
+import { WIDGET_TEMPLATES, getTemplate } from '@/editor/templates';
 
 export default function WidgetEditorScreen() {
   const { type } = useLocalSearchParams<{ type: string }>();
@@ -50,21 +51,16 @@ export default function WidgetEditorScreen() {
     async function initialize() {
       const widgetType = type || 'new';
 
-      if (
-        widgetType === 'new' ||
-        widgetType === 'blank' ||
-        widgetType === 'my-day' ||
-        widgetType === 'weather-focus' ||
-        widgetType === 'weather-card' ||
-        widgetType === 'weather'
-      ) {
-        const templateId =
-          widgetType === 'new'
-            ? 'my-day'
-            : widgetType === 'weather-card' || widgetType === 'weather'
-              ? 'weather-focus'
-              : widgetType;
-        initNewWidget(templateId);
+      const isKnownAlias = ['weather-card', 'weather', 'task-list', 'task', 'calendar-list', 'myday'].includes(widgetType);
+      const knownTemplate = WIDGET_TEMPLATES.find(
+        (t) =>
+          t.id === widgetType ||
+          (widgetType === 'new' && t.id === 'my-day') ||
+          (isKnownAlias && t.id === getTemplate(widgetType).id),
+      );
+
+      if (knownTemplate) {
+        initNewWidget(knownTemplate.id);
         return;
       }
 

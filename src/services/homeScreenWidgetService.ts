@@ -19,6 +19,15 @@ export const HOME_SCREEN_STORAGE_KEY = '@widgebuddy/home_screen_widget';
 export const IOS_APP_GROUP_ID = 'group.com.widgebuddy.app';
 export const ANDROID_PREFS_NAME = 'WidgeBuddyWidgetPrefs';
 
+export interface HomeScreenWidgetListItem {
+  id?: string;
+  title: string;
+  subtitle?: string;
+  meta?: string;
+  isDone?: boolean;
+  icon?: string;
+}
+
 export interface HomeScreenWidgetPayload {
   /** The full declarative widget definition */
   definition: DeclarativeWidgetDefinition;
@@ -31,10 +40,21 @@ export interface HomeScreenWidgetPayload {
   /** Formatted summary for quick native glance */
   glanceSummary?: {
     title: string;
+    widgetType: 'weather' | 'task' | 'calendar' | 'article' | 'clock' | 'custom';
+    backgroundColor?: string;
+    primaryText?: string;
+    secondaryText?: string;
+    metaText?: string;
+    // Weather specific
     temperature?: number;
     condition?: string;
     location?: string;
     forecastDays?: Array<{ day: string; temp: number; icon: string }>;
+    // Clock specific
+    timeText?: string;
+    dateText?: string;
+    // List based
+    listItems?: HomeScreenWidgetListItem[];
   };
 }
 
@@ -47,6 +67,65 @@ export interface PinWidgetResult {
   details?: string;
 }
 
+/**
+ * Recursively searches a declarative element tree for the first 'weather' element.
+ * Used to extract the user-configured forecastDays value.
+ */
+// REASON: Layout element tree is untyped at this layer; narrowed via type checks
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function findWeatherElement(element: any): { forecastDays?: number } | null {
+  if (!element) return null;
+  if (element.type === 'weather') return element;
+  if (Array.isArray(element.children)) {
+    for (const child of element.children) {
+      const found = findWeatherElement(child);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
+/**
+ * Recursively searches for any element of a given type in the layout tree.
+ */
+// REASON: Layout element tree is untyped at this layer
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function hasElementType(element: any, type: string): boolean {
+  if (!element) return false;
+  if (element.type === type) return true;
+  if (Array.isArray(element.children)) {
+    return element.children.some((c: any) => hasElementType(c, type)); // eslint-disable-line @typescript-eslint/no-explicit-any
+  }
+  return false;
+}
+
+function formatEventTime(startAt?: string, endAt?: string, isAllDay?: boolean): string {
+  if (!startAt) return 'All Day';
+  if (isAllDay) return 'All Day';
+  try {
+    const s = new Date(startAt);
+    const startStr = s.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    if (endAt) {
+      const e = new Date(endAt);
+      const endStr = e.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      return `${startStr} - ${endStr}`;
+    }
+    return startStr;
+  } catch {
+    return startAt;
+  }
+}
+
+function formatPublishedTime(publishedAt?: string): string {
+  if (!publishedAt) return '';
+  try {
+    const d = new Date(publishedAt);
+    return d.toLocaleDateString([], { month: 'short', day: 'numeric' });
+  } catch {
+    return '';
+  }
+}
+
 class HomeScreenWidgetService {
   /**
    * Synchronizes an active widget and its latest normalized items to the home screen bridge.
@@ -57,27 +136,151 @@ class HomeScreenWidgetService {
     size?: 'small' | 'medium' | 'large',
   ): Promise<HomeScreenWidgetPayload> {
     const targetSize = size || widget.defaultSize || 'medium';
+    const activeLayout = widget.layouts?.[targetSize];
+    const rootElement = activeLayout?.root;
+    const backgroundColor = activeLayout?.backgroundColor;
 
-    // Extract quick glance telemetry if weather item exists
-    const weatherItem = items.find((i) => i.type === 'weather');
-    const forecastDays = (weatherItem?.meta?.forecast as any[]) || [];
+    // Determine widgetType
+    let widgetType: 'weather' | 'task' | 'calendar' | 'article' | 'clock' | 'custom' = 'custom';
+
+    const category = widget.category?.toLowerCase() || '';
+    const widgetId = widget.id?.toLowerCase() || '';
+
+    if (category === 'weather' || widgetId.includes('weather') || hasElementType(rootElement, 'weather') || items.some((i) => i.type === 'weather')) {
+      widgetType = 'weather';
+    } else if (category === 'clock' || widgetId.includes('clock') || hasElementType(rootElement, 'clock')) {
+      widgetType = 'clock';
+    } else if (category === 'tasks' || category === 'productivity' || widgetId.includes('task') || hasElementType(rootElement, 'task_list') || items.some((i) => i.type === 'task')) {
+      widgetType = 'task';
+    } else if (category === 'calendar' || widgetId.includes('calendar') || hasElementType(rootElement, 'event_list') || items.some((i) => i.type === 'calendar_event')) {
+      widgetType = 'calendar';
+    } else if (category === 'news' || widgetId.includes('rss') || widgetId.includes('feed') || hasElementType(rootElement, 'article_list') || items.some((i) => i.type === 'article')) {
+      widgetType = 'article';
+    }
+
+    // Build specific glance telemetry based on widgetType
+    let glanceSummary: HomeScreenWidgetPayload['glanceSummary'] = {
+      title: widget.displayName,
+      widgetType,
+      backgroundColor,
+    };
+
+    if (widgetType === 'weather') {
+      const weatherItem = items.find((i) => i.type === 'weather');
+      // REASON: weatherItem.meta.forecast is untyped; narrowed immediately after access
+      const forecastDaysData = (weatherItem?.meta?.forecast as any[]) || []; // eslint-disable-line @typescript-eslint/no-explicit-any
+      const weatherElement = findWeatherElement(rootElement);
+      const maxForecastDays = weatherElement?.forecastDays ?? 3;
+      const temp = weatherItem?.temp !== undefined ? Math.round(weatherItem.temp) : undefined;
+      const condition = weatherItem?.condition;
+      const location = (weatherItem?.meta?.location as string) || (weatherItem?.meta?.cityName as string) || 'Local Weather';
+
+      glanceSummary = {
+        ...glanceSummary,
+        temperature: temp,
+        condition,
+        location,
+        primaryText: temp !== undefined ? `${temp}° ${condition || ''}`.trim() : 'Weather',
+        secondaryText: location,
+        metaText: 'Weather',
+        forecastDays: forecastDaysData.slice(0, maxForecastDays).map((f) => ({
+          day: f.day || 'Day',
+          temp: Math.round(f.temp ?? 20),
+          icon: f.icon || 'sun',
+        })),
+      };
+    } else if (widgetType === 'task') {
+      const taskItems = items.filter((i) => i.type === 'task');
+      // REASON: status check
+      const pendingTasks = taskItems.filter((t: any) => t.status === 'pending');
+      const listItems: HomeScreenWidgetListItem[] = taskItems.slice(0, 3).map((t: any) => ({
+        id: t.id,
+        title: t.title || 'Task',
+        subtitle: t.project || (t.priority ? `Priority: ${t.priority}` : undefined),
+        meta: t.dueDate ? t.dueDate.split('T')[0] : undefined,
+        isDone: t.status === 'completed',
+        icon: t.status === 'completed' ? 'check' : 'square',
+      }));
+
+      glanceSummary = {
+        ...glanceSummary,
+        primaryText: taskItems.length > 0 ? `${pendingTasks.length} pending task${pendingTasks.length === 1 ? '' : 's'}` : 'No active tasks',
+        secondaryText: taskItems[0]?.title ? `Next: ${taskItems[0].title}` : 'All tasks completed',
+        metaText: 'Tasks',
+        listItems,
+      };
+    } else if (widgetType === 'calendar') {
+      const calendarItems = items.filter((i) => i.type === 'calendar_event');
+      const listItems: HomeScreenWidgetListItem[] = calendarItems.slice(0, 3).map((e: any) => ({
+        id: e.id,
+        title: e.title || 'Event',
+        subtitle: formatEventTime(e.startAt, e.endAt, e.isAllDay),
+        meta: e.location || undefined,
+        icon: 'calendar',
+      }));
+
+      glanceSummary = {
+        ...glanceSummary,
+        primaryText: calendarItems.length > 0 ? (calendarItems[0].title || 'Upcoming Event') : 'No upcoming events',
+        secondaryText: calendarItems.length > 0 ? formatEventTime((calendarItems[0] as any).startAt, (calendarItems[0] as any).endAt, (calendarItems[0] as any).isAllDay) : 'Schedule is clear',
+        metaText: 'Calendar',
+        listItems,
+      };
+    } else if (widgetType === 'article') {
+      const articleItems = items.filter((i) => i.type === 'article');
+      const listItems: HomeScreenWidgetListItem[] = articleItems.slice(0, 3).map((a: any) => ({
+        id: a.id,
+        title: a.title || 'Headline',
+        subtitle: a.summary ? a.summary.slice(0, 60) : a.author,
+        meta: a.publishedAt ? formatPublishedTime(a.publishedAt) : a.provider,
+        icon: 'article',
+      }));
+
+      glanceSummary = {
+        ...glanceSummary,
+        primaryText: articleItems.length > 0 ? (articleItems[0] as any).title : 'Latest Articles',
+        secondaryText: articleItems[0] && (articleItems[0] as any).summary ? (articleItems[0] as any).summary.slice(0, 80) : 'Headlines & Updates',
+        metaText: articleItems[0]?.provider || 'RSS',
+        listItems,
+      };
+    } else if (widgetType === 'clock') {
+      const now = new Date();
+      const timeText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const dateText = now.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' });
+
+      glanceSummary = {
+        ...glanceSummary,
+        timeText,
+        dateText,
+        primaryText: timeText,
+        secondaryText: dateText,
+        metaText: 'Clock',
+      };
+    } else {
+      // Custom / generic
+      const listItems: HomeScreenWidgetListItem[] = items.slice(0, 3).map((it: any) => ({
+        id: it.id,
+        title: it.title || it.label || it.name || 'Item',
+        subtitle: it.summary || it.body || it.value?.toString(),
+        meta: it.provider || undefined,
+        icon: 'item',
+      }));
+
+      glanceSummary = {
+        ...glanceSummary,
+        primaryText: widget.displayName,
+        secondaryText: `${items.length} items`,
+        metaText: 'Widget',
+        listItems,
+      };
+    }
 
     const payload: HomeScreenWidgetPayload = {
       definition: widget,
       items,
       syncedAt: new Date().toISOString(),
       size: targetSize,
-      glanceSummary: {
-        title: widget.displayName,
-        temperature: weatherItem?.temp ? Math.round(weatherItem.temp) : undefined,
-        condition: weatherItem?.condition,
-        location: (weatherItem?.meta?.location as string) || (weatherItem?.meta?.cityName as string) || 'Local Weather',
-        forecastDays: forecastDays.slice(0, 4).map((f) => ({
-          day: f.day || 'Day',
-          temp: Math.round(f.temp ?? 20),
-          icon: f.icon || 'sun',
-        })),
-      },
+      glanceSummary,
     };
 
     // 1. Always save to AsyncStorage for cross-platform app persistence

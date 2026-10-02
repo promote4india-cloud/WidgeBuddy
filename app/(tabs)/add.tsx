@@ -5,29 +5,36 @@
  * and saved custom widgets. Uses TanStack Query (useWidgets) for fetching
  * persisted custom widgets from the repository.
  */
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Modal, ScrollView } from 'react-native';
 import { router } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Screen } from '@/ui/Screen';
 import { Icon, IconName } from '@/ui/Icon';
+import { Button } from '@/ui/Button';
 import { colors, useTheme, radius, spacing, typography } from '@/ui/theme';
 import { useWidgets } from '@/hooks/useWidgets';
-import { WIDGET_TEMPLATES, getTemplate } from '@/editor/templates';
+import { WIDGET_TEMPLATES, WidgetTemplate, getTemplate } from '@/editor/templates';
 import { getWidgetRepository } from '@/repositories';
+import { DeclarativeWidgetRenderer } from '@/renderer/declarative/DeclarativeWidgetRenderer';
+import { mockUniversalItems } from '@/renderer/mockData';
+import { WidgetSize } from '@/widgets/schema';
 
 const BUILT_IN_TYPES = [
   { id: 'weather-card', name: 'Weather Card', desc: 'Current conditions & forecast', icon: 'cloud-sun' as IconName, templateId: 'weather-focus' },
-  { id: 'clock', name: 'Clock', desc: 'Local time and date', icon: 'clock' as IconName, templateId: 'blank' },
-  { id: 'calendar-list', name: 'Calendar List', desc: 'Upcoming events', icon: 'calendar' as IconName, templateId: 'my-day' },
-  { id: 'task-list', name: 'Task List', desc: 'Your to-do list', icon: 'check-square' as IconName, templateId: 'my-day' },
-  { id: 'rss-feed', name: 'RSS Feed', desc: 'Latest articles', icon: 'rss' as IconName, templateId: 'blank' },
+  { id: 'clock', name: 'Digital Clock', desc: 'Local time and date banner', icon: 'clock' as IconName, templateId: 'clock' },
+  { id: 'calendar-list', name: 'Calendar Schedule', desc: 'Upcoming events & meetings', icon: 'calendar' as IconName, templateId: 'calendar' },
+  { id: 'task-list', name: 'Task Manager', desc: 'To-do list with checkboxes', icon: 'check-square' as IconName, templateId: 'tasks' },
+  { id: 'rss-feed', name: 'News & RSS Feed', desc: 'Latest articles & headlines', icon: 'rss' as IconName, templateId: 'rss-feed' },
 ];
 
 export default function AddWidgetScreen() {
   const { colors, isDark } = useTheme();
   const { widgets: customWidgets } = useWidgets();
   const queryClient = useQueryClient();
+
+  const [previewTemplate, setPreviewTemplate] = useState<WidgetTemplate | null>(null);
+  const [previewSize, setPreviewSize] = useState<WidgetSize>('medium');
 
   const handleCreateNew = (templateId = 'my-day') => {
     const target = templateId === 'weather-card' || templateId === 'weather' ? 'weather-focus' : templateId;
@@ -38,6 +45,11 @@ export default function AddWidgetScreen() {
     router.push(`/editor/${id}`);
   };
 
+  const handleOpenPreview = (tmpl: WidgetTemplate) => {
+    setPreviewTemplate(tmpl);
+    setPreviewSize(tmpl.definition.defaultSize || 'medium');
+  };
+
   const handleAddDirect = async (templateId: string) => {
     try {
       const tmpl = getTemplate(templateId);
@@ -46,6 +58,7 @@ export default function AddWidgetScreen() {
       const repo = getWidgetRepository();
       await repo.create(cloned);
       queryClient.invalidateQueries({ queryKey: ['widgets'] });
+      setPreviewTemplate(null);
       Alert.alert(
         'Widget Added!',
         `"${cloned.displayName}" has been added to your dashboard.`,
@@ -71,9 +84,9 @@ export default function AddWidgetScreen() {
           <Icon name="cloud-sun" size={24} color="#ffffff" />
         </View>
         <View style={styles.heroTextContainer}>
-          <Text style={styles.heroTitle}>Create Weather Widget</Text>
+          <Text style={styles.heroTitle}>Create Custom Widget</Text>
           <Text style={styles.heroSubtitle}>
-            Live temperature, forecast, condition icons & city detection
+            Build your own widget with live weather, tasks, calendar & news components
           </Text>
         </View>
         <Icon name="chevron-right" size={20} color="rgba(255, 255, 255, 0.7)" />
@@ -81,8 +94,13 @@ export default function AddWidgetScreen() {
 
       {/* Starter Templates */}
       <View style={styles.section}>
-        <Text style={[styles.sectionTitle, { color: colors.text }]}>Start From Template</Text>
-        <View style={styles.templatesRow}>
+        <View style={styles.sectionHeaderRow}>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Predefined Templates</Text>
+          <Text style={[styles.templateCount, { color: colors.textMuted }]}>
+            {WIDGET_TEMPLATES.length} templates
+          </Text>
+        </View>
+        <View style={styles.templatesGrid}>
           {WIDGET_TEMPLATES.map((tmpl) => (
             <View
               key={tmpl.id}
@@ -93,24 +111,52 @@ export default function AddWidgetScreen() {
             >
               <TouchableOpacity
                 activeOpacity={0.75}
-                onPress={() => handleCreateNew(tmpl.id)}
+                onPress={() => handleOpenPreview(tmpl)}
               >
-                <View style={[styles.templateIconWrapper, { backgroundColor: colors.primaryBackground }]}>
-                  <Icon name={tmpl.icon as IconName} size={20} color={colors.primary} />
+                <View style={styles.templateTopRow}>
+                  <View style={[styles.templateIconWrapper, { backgroundColor: colors.primaryBackground }]}>
+                    <Icon name={tmpl.icon as IconName} size={20} color={colors.primary} />
+                  </View>
+                  <View style={[styles.categoryBadge, { backgroundColor: colors.surfaceHover }]}>
+                    <Text style={[styles.categoryBadgeText, { color: colors.textMuted }]}>
+                      {tmpl.definition.category || 'Widget'}
+                    </Text>
+                  </View>
                 </View>
                 <Text style={[styles.templateName, { color: colors.text }]}>{tmpl.name}</Text>
                 <Text style={[styles.templateDesc, { color: colors.textMuted }]} numberOfLines={2}>
                   {tmpl.description}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.templateAddBtn, { backgroundColor: colors.primaryBackground }]}
-                onPress={() => handleAddDirect(tmpl.id)}
-                activeOpacity={0.75}
-              >
-                <Icon name="plus" size={13} color={colors.primary} />
-                <Text style={[styles.templateAddBtnText, { color: colors.primary }]}>Add</Text>
-              </TouchableOpacity>
+
+              <View style={styles.templateActionRow}>
+                <TouchableOpacity
+                  style={[styles.templatePreviewBtn, { borderColor: colors.border }]}
+                  onPress={() => handleOpenPreview(tmpl)}
+                  activeOpacity={0.7}
+                >
+                  <Icon name="eye" size={12} color={colors.text} />
+                  <Text style={[styles.templatePreviewBtnText, { color: colors.text }]}>Preview</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={[styles.templateCustomizeBtn, { borderColor: colors.border }]}
+                  onPress={() => handleCreateNew(tmpl.id)}
+                  activeOpacity={0.7}
+                >
+                  <Icon name="sliders" size={12} color={colors.text} />
+                  <Text style={[styles.templateCustomizeBtnText, { color: colors.text }]}>Edit</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={[styles.templateAddBtn, { backgroundColor: colors.primaryBackground }]}
+                  onPress={() => handleAddDirect(tmpl.id)}
+                  activeOpacity={0.75}
+                >
+                  <Icon name="plus" size={12} color={colors.primary} />
+                  <Text style={[styles.templateAddBtnText, { color: colors.primary }]}>Use</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           ))}
         </View>
@@ -220,6 +266,141 @@ export default function AddWidgetScreen() {
           <Icon name="chevron-right" size={20} color={colors.border} />
         </TouchableOpacity>
       </View>
+
+      {/* Template Preview Modal */}
+      <Modal
+        visible={previewTemplate !== null}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setPreviewTemplate(null)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={[styles.modalContent, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+            {previewTemplate && (
+              <>
+                <View style={styles.modalHeader}>
+                  <View style={styles.modalTitleRow}>
+                    <View style={[styles.modalIconWrapper, { backgroundColor: colors.primaryBackground }]}>
+                      <Icon name={previewTemplate.icon as IconName} size={22} color={colors.primary} />
+                    </View>
+                    <View style={styles.modalTitleContainer}>
+                      <View style={styles.modalBadgeRow}>
+                        <Text style={[styles.modalTitle, { color: colors.text }]}>{previewTemplate.name}</Text>
+                        <View style={[styles.categoryBadge, { backgroundColor: colors.surfaceHover }]}>
+                          <Text style={[styles.categoryBadgeText, { color: colors.textMuted }]}>
+                            {previewTemplate.definition.category || 'template'}
+                          </Text>
+                        </View>
+                      </View>
+                      <Text style={[styles.modalDesc, { color: colors.textMuted }]}>
+                        {previewTemplate.description}
+                      </Text>
+                    </View>
+                  </View>
+                  <TouchableOpacity
+                    style={[styles.modalCloseBtn, { backgroundColor: colors.surfaceHover }]}
+                    onPress={() => setPreviewTemplate(null)}
+                    hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                  >
+                    <Icon name="x" size={18} color={colors.text} />
+                  </TouchableOpacity>
+                </View>
+
+                {/* Size Selector */}
+                <View style={styles.sizeSelectorRow}>
+                  <Text style={[styles.sizeSelectorLabel, { color: colors.textMuted }]}>Preview Layout:</Text>
+                  <View style={[styles.sizeToggleGroup, { backgroundColor: colors.surfaceHover, borderColor: colors.border }]}>
+                    {(['small', 'medium', 'large'] as WidgetSize[]).map((sz) => {
+                      const isActive = previewSize === sz;
+                      const isSupported = (previewTemplate.definition.supportedSizes ?? []).includes(sz);
+                      return (
+                        <TouchableOpacity
+                          key={sz}
+                          disabled={!isSupported}
+                          style={[
+                            styles.sizeToggleBtn,
+                            isActive && { backgroundColor: colors.primary },
+                            !isSupported && styles.sizeToggleBtnDisabled,
+                          ]}
+                          onPress={() => setPreviewSize(sz)}
+                        >
+                          <Text
+                            style={[
+                              styles.sizeToggleText,
+                              { color: isActive ? '#ffffff' : colors.textMuted },
+                              !isSupported && styles.sizeToggleTextDisabled,
+                            ]}
+                          >
+                            {sz.charAt(0).toUpperCase() + sz.slice(1)}
+                          </Text>
+                        </TouchableOpacity>
+                      );
+                    })}
+                  </View>
+                </View>
+
+                {/* Live Widget Preview */}
+                <ScrollView
+                  style={styles.previewScroll}
+                  contentContainerStyle={styles.previewScrollContent}
+                  showsVerticalScrollIndicator={false}
+                >
+                  <View style={[styles.previewRendererBox, { backgroundColor: isDark ? '#0f172a' : '#f8fafc', borderColor: colors.border }]}>
+                    <DeclarativeWidgetRenderer
+                      definition={previewTemplate.definition}
+                      size={previewSize}
+                      items={mockUniversalItems}
+                    />
+                  </View>
+
+                  {/* Connectors & Metadata */}
+                  <View style={styles.metaContainer}>
+                    <View style={styles.metaItem}>
+                      <Text style={[styles.metaLabel, { color: colors.textMuted }]}>Connectors Used</Text>
+                      <Text style={[styles.metaValue, { color: colors.text }]}>
+                        {(previewTemplate.definition.connectorTypes?.length ?? 0) > 0
+                          ? previewTemplate.definition.connectorTypes!.join(', ')
+                          : 'None (Standalone)'}
+                      </Text>
+                    </View>
+                    <View style={styles.metaItem}>
+                      <Text style={[styles.metaLabel, { color: colors.textMuted }]}>Supported Sizes</Text>
+                      <Text style={[styles.metaValue, { color: colors.text }]}>
+                        {(previewTemplate.definition.supportedSizes ?? []).join(', ')}
+                      </Text>
+                    </View>
+                  </View>
+                </ScrollView>
+
+                {/* Action Buttons */}
+                <View style={[styles.modalActionsRow, { borderTopColor: colors.border }]}>
+                  <TouchableOpacity
+                    style={[styles.modalCustomizeBtn, { borderColor: colors.border, backgroundColor: colors.surface }]}
+                    onPress={() => {
+                      const id = previewTemplate.id;
+                      setPreviewTemplate(null);
+                      handleCreateNew(id);
+                    }}
+                    activeOpacity={0.75}
+                  >
+                    <Icon name="sliders" size={16} color={colors.text} />
+                    <Text style={[styles.modalCustomizeBtnText, { color: colors.text }]}>Customize</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={[styles.modalUseBtn, { backgroundColor: colors.primary }]}
+                    onPress={() => handleAddDirect(previewTemplate.id)}
+                    activeOpacity={0.8}
+                  >
+                    <Icon name="plus" size={16} color="#ffffff" />
+                    <Text style={styles.modalUseBtnText}>Use Template</Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
+          </View>
+        </View>
+      </Modal>
     </Screen>
   );
 }
@@ -289,17 +470,31 @@ const styles = StyleSheet.create({
     fontSize: 11,
     marginBottom: spacing.md,
   },
-  templatesRow: {
+  templateCount: {
+    ...typography.caption,
+    fontSize: 12,
+  },
+  templatesGrid: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: spacing.sm,
+    marginBottom: spacing.md,
   },
   templateCard: {
-    flex: 1,
+    width: '48.5%',
     backgroundColor: colors.surface,
     padding: spacing.md,
     borderRadius: radius.lg,
     borderWidth: 1,
     borderColor: colors.border,
+    justifyContent: 'space-between',
+    minHeight: 160,
+  },
+  templateTopRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: spacing.xs,
   },
   templateIconWrapper: {
     width: 36,
@@ -308,11 +503,22 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryBackground,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: spacing.xs,
+  },
+  categoryBadge: {
+    paddingHorizontal: spacing.xs + 2,
+    paddingVertical: 2,
+    borderRadius: radius.sm,
+  },
+  categoryBadgeText: {
+    ...typography.caption,
+    fontSize: 10,
+    textTransform: 'uppercase',
+    fontWeight: '600',
   },
   templateName: {
     ...typography.bodyMedium,
     fontSize: 13,
+    fontWeight: '700',
     color: colors.text,
     marginBottom: 2,
   },
@@ -321,6 +527,216 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 11,
     lineHeight: 14,
+    minHeight: 28,
+  },
+  templateActionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    marginTop: spacing.sm,
+  },
+  templatePreviewBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 2,
+    paddingVertical: 4,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+  },
+  templatePreviewBtnText: {
+    ...typography.captionMedium,
+    fontSize: 10,
+  },
+  templateCustomizeBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 2,
+    paddingVertical: 4,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+  },
+  templateCustomizeBtnText: {
+    ...typography.captionMedium,
+    fontSize: 10,
+  },
+  templateAddBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 2,
+    paddingVertical: 4,
+    borderRadius: radius.sm,
+  },
+  templateAddBtnText: {
+    ...typography.captionMedium,
+    fontSize: 10,
+    fontWeight: '700',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    maxHeight: '90%',
+    borderTopLeftRadius: radius.xl,
+    borderTopRightRadius: radius.xl,
+    borderWidth: 1,
+    padding: spacing.lg,
+    paddingBottom: spacing.xl,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: spacing.md,
+  },
+  modalTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    flex: 1,
+    marginRight: spacing.sm,
+  },
+  modalIconWrapper: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalTitleContainer: {
+    flex: 1,
+  },
+  modalBadgeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+  },
+  modalTitle: {
+    ...typography.h3,
+    fontSize: 17,
+  },
+  modalDesc: {
+    ...typography.caption,
+    fontSize: 12,
+    marginTop: 2,
+  },
+  modalCloseBtn: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sizeSelectorRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: spacing.md,
+  },
+  sizeSelectorLabel: {
+    ...typography.captionMedium,
+    fontSize: 12,
+  },
+  sizeToggleGroup: {
+    flexDirection: 'row',
+    borderRadius: radius.md,
+    borderWidth: 1,
+    overflow: 'hidden',
+  },
+  sizeToggleBtn: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: 6,
+  },
+  sizeToggleBtnDisabled: {
+    opacity: 0.35,
+  },
+  sizeToggleText: {
+    ...typography.captionMedium,
+    fontSize: 12,
+  },
+  sizeToggleTextDisabled: {
+    textDecorationLine: 'line-through',
+  },
+  previewScroll: {
+    maxHeight: 380,
+  },
+  previewScrollContent: {
+    paddingBottom: spacing.md,
+  },
+  previewRendererBox: {
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    padding: spacing.sm,
+    minHeight: 180,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.md,
+  },
+  metaContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: spacing.sm,
+    marginTop: spacing.xs,
+  },
+  metaItem: {
+    flex: 1,
+    padding: spacing.sm,
+    borderRadius: radius.md,
+    backgroundColor: 'rgba(0,0,0,0.03)',
+  },
+  metaLabel: {
+    ...typography.caption,
+    fontSize: 11,
+    marginBottom: 2,
+  },
+  metaValue: {
+    ...typography.bodyMedium,
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  modalActionsRow: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+    paddingTop: spacing.md,
+    borderTopWidth: 1,
+    marginTop: spacing.xs,
+  },
+  modalCustomizeBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: spacing.md,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+  },
+  modalCustomizeBtnText: {
+    ...typography.bodyMedium,
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  modalUseBtn: {
+    flex: 1.3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    paddingVertical: spacing.md,
+    borderRadius: radius.lg,
+  },
+  modalUseBtnText: {
+    ...typography.bodyMedium,
+    color: '#ffffff',
+    fontSize: 14,
+    fontWeight: '700',
   },
   card: {
     flexDirection: 'row',
@@ -375,22 +791,6 @@ const styles = StyleSheet.create({
     ...typography.captionMedium,
     color: colors.primary,
     fontSize: 11,
-  },
-  templateAddBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 3,
-    backgroundColor: colors.primaryBackground,
-    paddingVertical: 4,
-    borderRadius: radius.md,
-    marginTop: spacing.sm,
-  },
-  templateAddBtnText: {
-    ...typography.captionMedium,
-    color: colors.primary,
-    fontSize: 11,
-    fontWeight: '700',
   },
   cardMainTouchable: {
     flex: 1,

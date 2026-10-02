@@ -2,6 +2,7 @@
 <!--
   targets/android/widgebuddy_widget_layout.xml
   Native Android RemoteViews Layout for WidgeBuddy Home Screen Widget.
+  Supports Polymorphic Widgets: Weather, Tasks, Calendar Events, Articles, Clock, Custom.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"
@@ -9,14 +10,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/widget_background_rounded"
-    android:padding="16dp">
+    android:padding="14dp">
 
     <!-- Header Row -->
     <LinearLayout
+        android:id="@+id/widget_header_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:layout_marginBottom="6dp">
 
         <TextView
             android:id="@+id/widget_title"
@@ -25,145 +28,381 @@
             android:layout_weight="1"
             android:text="WidgeBuddy"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="end" />
 
         <TextView
             android:id="@+id/widget_sync_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Updated"
+            android:text="WidgeBuddy"
             android:textColor="#94A3B8"
-            android:textSize="11sp" />
+            android:textSize="10sp"
+            android:singleLine="true" />
     </LinearLayout>
 
-    <!-- Main Content Area: Temperature & Condition -->
+    <!-- 1. WEATHER CONTAINER -->
     <LinearLayout
+        android:id="@+id/widget_weather_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="8dp">
+        android:orientation="vertical"
+        android:visibility="visible">
 
+        <!-- Main Temp & Condition -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/widget_temperature"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="21°"
-                android:textColor="#FFFFFF"
-                android:textSize="38sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/widget_condition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mostly Sunny"
-                android:textColor="#E0F2FE"
-                android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/widget_temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="21°"
+                    android:textColor="#FFFFFF"
+                    android:textSize="36sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/widget_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="San Francisco"
-                android:textColor="#BAE6FD"
-                android:textSize="11sp" />
+                <TextView
+                    android:id="@+id/widget_condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mostly Sunny"
+                    android:textColor="#E0F2FE"
+                    android:textSize="12sp"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/widget_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="San Francisco"
+                    android:textColor="#BAE6FD"
+                    android:textSize="10sp"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/widget_weather_icon"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_sun_weather"
+                android:contentDescription="Weather Icon" />
         </LinearLayout>
 
-        <!-- Right Action / Status Area -->
-        <ImageView
-            android:id="@+id/widget_weather_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_sun_weather"
-            android:contentDescription="Weather Icon" />
+        <!-- Dynamic Forecast Strip -->
+        <LinearLayout
+            android:id="@+id/widget_forecast_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:id="@+id/forecast_col_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/forecast_day_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today"
+                    android:textColor="#BAE6FD"
+                    android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/forecast_temp_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="21°"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/forecast_col_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/forecast_day_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tomorrow"
+                    android:textColor="#BAE6FD"
+                    android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/forecast_temp_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="23°"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/forecast_col_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/forecast_day_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Day 3"
+                    android:textColor="#BAE6FD"
+                    android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/forecast_temp_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="19°"
+                    android:textColor="#FFFFFF"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- Footer: 3-Day Forecast Strip -->
+    <!-- 2. LIST CONTAINER (Tasks, Calendar, Articles, RSS) -->
     <LinearLayout
-        android:id="@+id/widget_forecast_row"
+        android:id="@+id/widget_list_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
         android:gravity="center_vertical"
-        android:weightSum="3">
+        android:visibility="gone">
 
+        <!-- List Item 1 -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/list_item_1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
             <TextView
-                android:id="@+id/forecast_day_1"
+                android:id="@+id/item_icon_1"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="•"
+                android:textColor="#60A5FA"
+                android:textSize="13sp"
+                android:gravity="center" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="4dp">
+
+                <TextView
+                    android:id="@+id/item_title_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Item Title 1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/item_sub_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Item subtitle"
+                    android:textColor="#94A3B8"
+                    android:textSize="10sp"
+                    android:singleLine="true"
+                    android:ellipsize="end" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_meta_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Today"
-                android:textColor="#BAE6FD"
-                android:textSize="10sp" />
-            <TextView
-                android:id="@+id/forecast_temp_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="21°"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:text=""
+                android:textColor="#38BDF8"
+                android:textSize="9sp"
+                android:layout_marginStart="4dp" />
         </LinearLayout>
 
+        <!-- List Item 2 -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/list_item_2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
             <TextView
-                android:id="@+id/forecast_day_2"
+                android:id="@+id/item_icon_2"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="•"
+                android:textColor="#60A5FA"
+                android:textSize="13sp"
+                android:gravity="center" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="4dp">
+
+                <TextView
+                    android:id="@+id/item_title_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Item Title 2"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/item_sub_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Item subtitle"
+                    android:textColor="#94A3B8"
+                    android:textSize="10sp"
+                    android:singleLine="true"
+                    android:ellipsize="end" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_meta_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tomorrow"
-                android:textColor="#BAE6FD"
-                android:textSize="10sp" />
-            <TextView
-                android:id="@+id/forecast_temp_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="23°"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:text=""
+                android:textColor="#38BDF8"
+                android:textSize="9sp"
+                android:layout_marginStart="4dp" />
         </LinearLayout>
 
+        <!-- List Item 3 -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/list_item_3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
             <TextView
-                android:id="@+id/forecast_day_3"
+                android:id="@+id/item_icon_3"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="•"
+                android:textColor="#60A5FA"
+                android:textSize="13sp"
+                android:gravity="center" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="4dp">
+
+                <TextView
+                    android:id="@+id/item_title_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Item Title 3"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:singleLine="true"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/item_sub_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Item subtitle"
+                    android:textColor="#94A3B8"
+                    android:textSize="10sp"
+                    android:singleLine="true"
+                    android:ellipsize="end" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_meta_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Day 3"
-                android:textColor="#BAE6FD"
-                android:textSize="10sp" />
-            <TextView
-                android:id="@+id/forecast_temp_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="19°"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:text=""
+                android:textColor="#38BDF8"
+                android:textSize="9sp"
+                android:layout_marginStart="4dp" />
         </LinearLayout>
+
+        <!-- Empty State Message -->
+        <TextView
+            android:id="@+id/widget_list_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No items to display"
+            android:textColor="#94A3B8"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- 3. CLOCK CONTAINER -->
+    <LinearLayout
+        android:id="@+id/widget_clock_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/widget_clock_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:00"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/widget_clock_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monday, Oct 2"
+            android:textColor="#94A3B8"
+            android:textSize="13sp" />
     </LinearLayout>
 </LinearLayout>

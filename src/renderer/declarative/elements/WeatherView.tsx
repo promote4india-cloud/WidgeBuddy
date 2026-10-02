@@ -55,28 +55,8 @@ export const WeatherView = React.memo(function WeatherView({
 
   const content = (
     <View style={styles.container}>
-      {isForecastMode ? (
-        // Multi-day forecast list
-        <View style={styles.forecastRow}>
-          {forecastDays.slice(0, numForecastDays).map((dayForecast, idx) => (
-            <View key={idx} style={styles.forecastDay}>
-              <Text style={styles.forecastDayText}>{dayForecast.day}</Text>
-              <IconView
-                element={{
-                  type: 'icon',
-                  name: dayForecast.icon ?? 'sun',
-                  size: 'small',
-                  color: '#fde047',
-                }}
-              />
-              <Text style={styles.forecastTempText}>
-                {Math.round(dayForecast.temp)}°
-              </Text>
-            </View>
-          ))}
-        </View>
-      ) : (
-        // Current conditions
+      {/* Current conditions section (shown for all modes except pure 'forecast') */}
+      {!isForecastMode && (
         <View style={styles.currentContainer}>
           <View style={styles.tempConditionRow}>
             {showConditionIcon && (
@@ -111,6 +91,28 @@ export const WeatherView = React.memo(function WeatherView({
               )}
             </View>
           )}
+        </View>
+      )}
+
+      {/* Forecast strip (shown when forecastDays > 0 and forecast data exists) */}
+      {numForecastDays > 0 && forecastDays.length > 0 && (
+        <View style={styles.forecastRow}>
+          {forecastDays.slice(0, numForecastDays).map((dayForecast, idx) => (
+            <View key={idx} style={styles.forecastDay}>
+              <Text style={styles.forecastDayText}>{dayForecast.day}</Text>
+              <IconView
+                element={{
+                  type: 'icon',
+                  name: dayForecast.icon ?? 'sun',
+                  size: 'small',
+                  color: '#fde047',
+                }}
+              />
+              <Text style={styles.forecastTempText}>
+                {Math.round(dayForecast.temp)}°
+              </Text>
+            </View>
+          ))}
         </View>
       )}
     </View>

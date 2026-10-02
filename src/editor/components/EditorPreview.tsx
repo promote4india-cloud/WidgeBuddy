@@ -6,14 +6,15 @@
  * and mock normalized data.
  */
 
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useCallback, useMemo } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Linking, Alert } from 'react-native';
 import { Icon } from '@/ui/Icon';
 import { colors, radius, spacing, typography } from '@/ui/theme';
 import { useEditorStore } from '@/store/editorStore';
 import { WidgetSize, WIDGET_SIZE_DIMENSIONS } from '@/widgets/declarative/layout';
 import { DeclarativeWidgetRenderer } from '@/renderer/declarative/DeclarativeWidgetRenderer';
 import { mockUniversalItems } from '@/renderer/mockData';
+import { Action } from '@/widgets/schema';
 
 const SIZES: { size: WidgetSize; label: string; desc: string }[] = [
   { size: 'small', label: 'Small', desc: '2x2' },
@@ -25,6 +26,44 @@ export function EditorPreview() {
   const draft = useEditorStore((s) => s.draft);
   const activeSize = useEditorStore((s) => s.activeSize);
   const setActiveSize = useEditorStore((s) => s.setActiveSize);
+  const [taskOverrides, setTaskOverrides] = useState<Record<string, 'pending' | 'completed'>>({});
+
+  const previewItems = useMemo(() => {
+    if (Object.keys(taskOverrides).length === 0) {
+      return mockUniversalItems;
+    }
+    return mockUniversalItems.map((item) => {
+      if (item.type === 'task' && taskOverrides[item.id]) {
+        return { ...item, status: taskOverrides[item.id]! };
+      }
+      return item;
+    });
+  }, [taskOverrides]);
+
+  const handleAction = useCallback(async (action: Action) => {
+    if (!action || !action.type) return;
+
+    if (action.type === 'toggle_task') {
+      const taskId = action.payload?.['taskId'] as string | undefined;
+      const currentStatus = action.payload?.['currentStatus'] as string | undefined;
+      if (taskId) {
+        setTaskOverrides((prev) => {
+          const current = prev[taskId] ?? currentStatus ?? 'pending';
+          const next = current === 'completed' ? 'pending' : 'completed';
+          return { ...prev, [taskId]: next };
+        });
+      }
+    } else if (action.type === 'open_url' && action.url) {
+      try {
+        const canOpen = await Linking.canOpenURL(action.url);
+        if (canOpen) {
+          await Linking.openURL(action.url);
+        }
+      } catch {
+        Alert.alert('Preview Action', `Opened URL: ${action.url}`);
+      }
+    }
+  }, []);
 
   if (!draft) return null;
 
@@ -72,7 +111,8 @@ export function EditorPreview() {
           <DeclarativeWidgetRenderer
             definition={draft}
             size={activeSize}
-            items={mockUniversalItems}
+            items={previewItems}
+            onAction={handleAction}
           />
         </View>
       </View>

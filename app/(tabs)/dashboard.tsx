@@ -5,8 +5,8 @@
  * Renders actual visual widgets using DeclarativeWidgetRenderer with live/mock items.
  * Uses TanStack Query (useWidgets) for data fetching — no hardcoded mocks.
  */
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
+import React, { useState, useCallback, useMemo } from 'react';
+import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity, Alert, Linking } from 'react-native';
 import { router } from 'expo-router';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Screen } from '@/ui/Screen';
@@ -21,7 +21,7 @@ import { ParsedDeclarativeWidgetDefinition } from '@/widgets/declarative/definit
 import { DeclarativeWidgetRenderer } from '@/renderer/declarative/DeclarativeWidgetRenderer';
 import { mockUniversalItems } from '@/renderer/mockData';
 import { fetchNormalisedData } from '@/services/connectorService';
-import { UniversalItem } from '@/widgets/schema';
+import { Action, UniversalItem } from '@/widgets/schema';
 
 /** Maps a widget category to a fallback icon when the widget itself has no icon. */
 function getWidgetIcon(widget: ParsedDeclarativeWidgetDefinition): IconName {
@@ -40,6 +40,7 @@ export default function DashboardScreen() {
   const { widgets, isLoading, isError } = useWidgets();
   const queryClient = useQueryClient();
   const [homeModalWidget, setHomeModalWidget] = useState<ParsedDeclarativeWidgetDefinition | null>(null);
+  const [taskOverrides, setTaskOverrides] = useState<Record<string, 'pending' | 'completed'>>({});
 
   // Fetch live weather data for weather widgets
   const { data: liveWeatherItems } = useQuery<UniversalItem[]>({
@@ -59,15 +60,79 @@ export default function DashboardScreen() {
   });
 
   // Combine live weather data with standard mock items for rich display
-  const combinedItems = React.useMemo(() => {
-    if (!liveWeatherItems || liveWeatherItems.length === 0) {
-      return mockUniversalItems;
+  const combinedItems = useMemo(() => {
+    const base =
+      !liveWeatherItems || liveWeatherItems.length === 0
+        ? mockUniversalItems
+        : [
+            ...liveWeatherItems,
+            ...mockUniversalItems.filter((i) => i.type !== 'weather'),
+          ];
+
+    if (Object.keys(taskOverrides).length === 0) {
+      return base;
     }
-    return [
-      ...liveWeatherItems,
-      ...mockUniversalItems.filter((i) => i.type !== 'weather'),
-    ];
-  }, [liveWeatherItems]);
+
+    return base.map((item) => {
+      if (item.type === 'task' && taskOverrides[item.id]) {
+        return {
+          ...item,
+          status: taskOverrides[item.id]!,
+        };
+      }
+      return item;
+    });
+  }, [liveWeatherItems, taskOverrides]);
+
+  const handleWidgetAction = useCallback(async (action: Action) => {
+    if (!action || !action.type) return;
+
+    switch (action.type) {
+      case 'open_url': {
+        if (action.url) {
+          try {
+            const canOpen = await Linking.canOpenURL(action.url);
+            if (canOpen) {
+              await Linking.openURL(action.url);
+            } else {
+              Alert.alert('Cannot Open Link', action.url);
+            }
+          } catch {
+            Alert.alert('Error', 'Unable to open link in browser.');
+          }
+        }
+        break;
+      }
+      case 'toggle_task': {
+        const taskId = action.payload?.['taskId'] as string | undefined;
+        const currentStatus = action.payload?.['currentStatus'] as string | undefined;
+        if (taskId) {
+          setTaskOverrides((prev) => {
+            const current = prev[taskId] ?? currentStatus ?? 'pending';
+            const next = current === 'completed' ? 'pending' : 'completed';
+            return { ...prev, [taskId]: next };
+          });
+        }
+        break;
+      }
+      case 'navigate': {
+        if (action.route) {
+          router.push(action.route as any);
+        }
+        break;
+      }
+      case 'run_connector': {
+        queryClient.invalidateQueries({ queryKey: ['dashboard-live-weather'] });
+        break;
+      }
+      case 'custom': {
+        if (action.actionName === 'refresh' || action.actionName === 'refresh_all') {
+          queryClient.invalidateQueries({ queryKey: ['dashboard-live-weather'] });
+        }
+        break;
+      }
+    }
+  }, [queryClient]);
 
   const handleDeleteWidget = (id: string, name: string) => {
     Alert.alert(
@@ -230,6 +295,7 @@ export default function DashboardScreen() {
               definition={widget}
               size={widget.defaultSize ?? 'medium'}
               items={combinedItems}
+              onAction={handleWidgetAction}
             />
           </View>
         </View>

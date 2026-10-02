@@ -12,7 +12,7 @@ import {
   ChevronDown, ChevronUp, Check, X, Sparkles, Newspaper, BarChart2,
   Activity, Minus, Type, Columns, Smartphone, ExternalLink, ArrowUpDown,
   ShieldCheck, AlertTriangle, Navigation, MapPin, Slash, CloudOff,
-  RefreshCw, Circle, XCircle, Lock
+  RefreshCw, Circle, XCircle, Lock, Briefcase, Sunrise, Sunset
 } from 'lucide-react-native';
 import { colors } from './theme';
 
@@ -68,6 +68,9 @@ const iconMap = {
   'circle': Circle,
   'x-circle': XCircle,
   'lock': Lock,
+  'briefcase': Briefcase,
+  'sunrise': Sunrise,
+  'sunset': Sunset,
 };
 
 export type IconName = keyof typeof iconMap;

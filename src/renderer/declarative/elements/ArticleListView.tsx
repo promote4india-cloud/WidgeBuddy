@@ -27,6 +27,8 @@ export const ArticleListView = React.memo(function ArticleListView({
   const emptyMessage = element.emptyMessage ?? 'No articles available';
   const showImage = element.showImage !== false;
   const showTimestamp = element.showTimestamp !== false;
+  const showSummary = Boolean(element.showSummary);
+  const showAuthor = Boolean(element.showAuthor);
   const visibleArticles = articles.slice(0, maxItems);
 
   if (visibleArticles.length === 0) {
@@ -59,7 +61,7 @@ export const ArticleListView = React.memo(function ArticleListView({
             activeOpacity={0.7}
             style={[styles.articleRow, isCardLayout && styles.articleCard]}
           >
-            {element.showImage && article.imageUrl ? (
+            {showImage && article.imageUrl ? (
               <Image source={{ uri: article.imageUrl }} style={styles.thumbnail} />
             ) : null}
 
@@ -68,17 +70,17 @@ export const ArticleListView = React.memo(function ArticleListView({
                 {article.title}
               </Text>
 
-              {element.showSummary && article.summary ? (
+              {showSummary && article.summary ? (
                 <Text style={styles.summary} numberOfLines={2}>
                   {article.summary}
                 </Text>
               ) : null}
 
               <View style={styles.metaRow}>
-                {element.showAuthor && article.author ? (
+                {showAuthor && article.author ? (
                   <Text style={styles.metaText}>{article.author}</Text>
                 ) : null}
-                {element.showTimestamp && article.publishedAt ? (
+                {showTimestamp && article.publishedAt ? (
                   <Text style={styles.metaText}>{formatDate(article.publishedAt)}</Text>
                 ) : null}
               </View>

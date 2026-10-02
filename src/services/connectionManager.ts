@@ -17,6 +17,7 @@ import { create } from 'zustand';
 import { IconName } from '@/ui/Icon';
 import { calendarConnector } from '@/connectors/calendar/calendar.connector';
 import { weatherConnector } from '@/connectors/weather/weather.connector';
+import { connectorRegistry } from '@/connectors/base/ConnectorRegistry';
 import { isSupabaseConfigured, supabase } from './supabase';
 
 export const CONNECTIONS_STORAGE_KEY = '@widgebuddy/connections_state';
@@ -113,6 +114,13 @@ export const useConnectionStore = create<ConnectionStoreState>((set, get) => ({
           accessToken: 'simulated_oauth_token',
           tokenExpiresAt: Date.now() + 3600 * 1000,
         });
+
+        // Initialize weather connector
+        await weatherConnector.connect({
+          useCurrentLocation: true,
+          units: 'celsius',
+          fallbackCity: 'New York',
+        });
       }
     } catch {
       // Graceful fallback to default
@@ -122,8 +130,9 @@ export const useConnectionStore = create<ConnectionStoreState>((set, get) => ({
   connectProvider: async (providerId: string, email = 'user@gmail.com') => {
     set({ activeProviderAction: providerId });
     try {
+      const now = Date.now();
+
       if (providerId === 'google_calendar') {
-        const now = Date.now();
         await calendarConnector.connect({
           calendarId: 'primary',
           accountEmail: email,
@@ -131,9 +140,26 @@ export const useConnectionStore = create<ConnectionStoreState>((set, get) => ({
           refreshToken: `simulated_refresh_${now}`,
           tokenExpiresAt: now + 3600 * 1000, // 1 hour validity
         });
-
-        // Run immediate sync to verify
         await calendarConnector.fetch();
+      } else if (providerId === 'openweather' || providerId === 'weather') {
+        await weatherConnector.connect({
+          useCurrentLocation: true,
+          units: 'celsius',
+          fallbackCity: 'New York',
+        });
+        await weatherConnector.fetch();
+      } else if (providerId === 'todoist') {
+        const todoistConn = connectorRegistry.get('todoist');
+        if (todoistConn) {
+          await todoistConn.connect({ apiToken: `simulated_todoist_${now}` });
+          await todoistConn.fetch();
+        }
+      } else if (providerId === 'rss') {
+        const rssConn = connectorRegistry.get('rss');
+        if (rssConn) {
+          await rssConn.connect({ feedUrl: 'https://news.ycombinator.com/rss' });
+          await rssConn.fetch();
+        }
       }
 
       const updated = get().connections.map((conn) => {
@@ -175,8 +201,14 @@ export const useConnectionStore = create<ConnectionStoreState>((set, get) => ({
     try {
       if (providerId === 'google_calendar') {
         await calendarConnector.disconnect();
-      } else if (providerId === 'openweather') {
+      } else if (providerId === 'openweather' || providerId === 'weather') {
         await weatherConnector.disconnect();
+      } else if (providerId === 'todoist') {
+        const todoistConn = connectorRegistry.get('todoist');
+        if (todoistConn) await todoistConn.disconnect();
+      } else if (providerId === 'rss') {
+        const rssConn = connectorRegistry.get('rss');
+        if (rssConn) await rssConn.disconnect();
       }
 
       const updated = get().connections.map((conn) => {
@@ -203,8 +235,24 @@ export const useConnectionStore = create<ConnectionStoreState>((set, get) => ({
     try {
       if (providerId === 'google_calendar') {
         await calendarConnector.refresh();
-      } else if (providerId === 'openweather') {
+      } else if (providerId === 'openweather' || providerId === 'weather') {
         await weatherConnector.refresh();
+      } else if (providerId === 'todoist') {
+        const todoistConn = connectorRegistry.get('todoist');
+        if (todoistConn) {
+          if (todoistConn.getStatus() !== 'connected') {
+            await todoistConn.connect({ apiToken: 'simulated_todoist_token' });
+          }
+          await todoistConn.refresh();
+        }
+      } else if (providerId === 'rss') {
+        const rssConn = connectorRegistry.get('rss');
+        if (rssConn) {
+          if (rssConn.getStatus() !== 'connected') {
+            await rssConn.connect({ feedUrl: 'https://news.ycombinator.com/rss' });
+          }
+          await rssConn.refresh();
+        }
       }
 
       const nowIso = new Date().toISOString();

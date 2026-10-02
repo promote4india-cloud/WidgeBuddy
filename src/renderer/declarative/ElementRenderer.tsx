@@ -48,11 +48,11 @@ export const ElementRenderer = React.memo(function ElementRenderer({
     case 'weather':
       return <WeatherView element={element} {...props} />;
     case 'event':
-      return <EventView element={element} onAction={onAction} />;
+      return <EventView element={element} {...props} />;
     case 'taskList':
       return <TaskListView element={element} {...props} />;
     case 'articleList':
-      return <ArticleListView element={element} onAction={onAction} />;
+      return <ArticleListView element={element} {...props} />;
     case 'metric':
       return <MetricView element={element} onAction={onAction} />;
     case 'divider':

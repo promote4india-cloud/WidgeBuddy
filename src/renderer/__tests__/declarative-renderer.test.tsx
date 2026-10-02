@@ -386,6 +386,39 @@ describe('DeclarativeWidgetRenderer', () => {
       expect(resolved).toBe('Hello London, temperature is 24');
     });
 
+    it('resolveTemplate resolves nested metadata and shorthand item keys', () => {
+      const template = 'Weather in {{weather.cityName}}: {{weather.temp}}°C, wind {{weather.windSpeed}} km/h (meta: {{weather.meta.cityName}}), Next: {{event.title}}';
+      const items = [
+        {
+          id: 'w1',
+          provider: 'weather',
+          type: 'weather' as const,
+          temp: 22,
+          condition: 'Partly Cloudy',
+          updatedAt: '2026-09-19T10:00:00Z',
+          meta: {
+            cityName: 'San Francisco',
+            windSpeed: 14.5,
+          },
+        },
+        {
+          id: 'e1',
+          provider: 'google_calendar',
+          type: 'calendar_event' as const,
+          title: 'Design Review',
+          startAt: '2026-09-19T11:00:00Z',
+          endAt: '2026-09-19T12:00:00Z',
+          isAllDay: false,
+          updatedAt: '2026-09-19T10:00:00Z',
+        },
+      ];
+
+      const resolved = resolveTemplate(template, items);
+      expect(resolved).toBe(
+        'Weather in San Francisco: 22°C, wind 14.5 km/h (meta: San Francisco), Next: Design Review'
+      );
+    });
+
     it('formatTime formats ISO datetime to 12-hour string', () => {
       const timeStr = formatTime('2026-09-19T14:30:00.000Z');
       expect(typeof timeStr).toBe('string');

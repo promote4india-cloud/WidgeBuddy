@@ -30,8 +30,74 @@ export function getFirstItemByType<T extends UniversalItem['type']>(
 }
 
 /**
- * Resolves template string placeholders like {{weather.temp}} or {{config.city}}
- * using data from normalized items or user configuration.
+ * Helper to retrieve a property from an object, supporting dot-notation paths,
+ * meta property fallback, and direct key matching.
+ */
+function getNestedValue(obj: unknown, path: string): unknown {
+  if (!obj || typeof obj !== 'object') return undefined;
+
+  const record = obj as Record<string, unknown>;
+
+  // 1. Direct key match (e.g. record["cityName"] or record["meta.cityName"])
+  if (path in record && record[path] !== undefined) {
+    return record[path];
+  }
+
+  // 2. Dot-separated path navigation (e.g. "meta.cityName" -> record.meta.cityName)
+  const segments = path.split('.');
+  let current: any = obj;
+  let found = true;
+  for (const seg of segments) {
+    if (current === null || current === undefined || typeof current !== 'object') {
+      found = false;
+      break;
+    }
+    current = current[seg];
+  }
+  if (found && current !== undefined) {
+    return current;
+  }
+
+  // 3. Fallback: If obj has a `meta` dictionary, search inside `meta`
+  if ('meta' in record && record.meta && typeof record.meta === 'object') {
+    const metaRecord = record.meta as Record<string, unknown>;
+    if (path in metaRecord && metaRecord[path] !== undefined) {
+      return metaRecord[path];
+    }
+    // Also try nested in meta for dotted paths
+    let metaCurrent: any = metaRecord;
+    let metaFound = true;
+    for (const seg of segments) {
+      if (metaCurrent === null || metaCurrent === undefined || typeof metaCurrent !== 'object') {
+        metaFound = false;
+        break;
+      }
+      metaCurrent = metaCurrent[seg];
+    }
+    if (metaFound && metaCurrent !== undefined) {
+      return metaCurrent;
+    }
+  }
+
+  return undefined;
+}
+
+/**
+ * Checks if a UniversalItem type matches a given type prefix or common alias.
+ */
+function isMatchingItemType(itemType: string, prefix: string): boolean {
+  if (itemType === prefix) return true;
+  if (prefix === 'event' && itemType === 'calendar_event') return true;
+  if (prefix === 'calendar' && itemType === 'calendar_event') return true;
+  if (prefix === 'tasks' && itemType === 'task') return true;
+  if (prefix === 'news' && itemType === 'article') return true;
+  if (prefix === 'articles' && itemType === 'article') return true;
+  return false;
+}
+
+/**
+ * Resolves template string placeholders like {{weather.temp}}, {{weather.cityName}},
+ * {{weather.meta.cityName}}, or {{config.city}} using data from normalized items or user configuration.
  */
 export function resolveTemplate(
   template: string,
@@ -45,36 +111,37 @@ export function resolveTemplate(
   return template.replace(/\{\{\s*([a-zA-Z0-9_.-]+)\s*\}\}/g, (match, key: string) => {
     // 1. Check user config, e.g. {{config.city}} or {{city}}
     if (userConfig) {
-      if (key.startsWith('config.') && key.slice(7) in userConfig) {
-        const val = userConfig[key.slice(7)];
-        return val !== undefined ? String(val) : match;
+      if (key.startsWith('config.')) {
+        const val = getNestedValue(userConfig, key.slice(7));
+        if (val !== undefined) return String(val);
       }
-      if (key in userConfig) {
-        const val = userConfig[key];
-        return val !== undefined ? String(val) : match;
+      const directConfigVal = getNestedValue(userConfig, key);
+      if (directConfigVal !== undefined) {
+        return String(directConfigVal);
       }
     }
 
-    // 2. Check items by type prefix, e.g. {{weather.temp}} or {{weather.condition}}
-    if (items) {
+    // 2. Check items by type prefix, e.g. {{weather.temp}}, {{weather.cityName}}, {{weather.meta.cityName}}
+    if (items && items.length > 0) {
       const dotIndex = key.indexOf('.');
       if (dotIndex > 0) {
         const typePrefix = key.slice(0, dotIndex);
-        const propName = key.slice(dotIndex + 1);
-        const matchedItem = items.find((it) => it.type === typePrefix);
-        if (matchedItem && propName in matchedItem) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const val = (matchedItem as any)[propName];
-          return val !== undefined ? String(val) : match;
+        const propPath = key.slice(dotIndex + 1);
+
+        const matchedItem = items.find((it) => isMatchingItemType(it.type, typePrefix));
+        if (matchedItem) {
+          const val = getNestedValue(matchedItem, propPath);
+          if (val !== undefined) {
+            return String(val);
+          }
         }
       }
 
-      // Check top-level property across all items
+      // 3. Fallback: Search property across all items (direct property or nested in meta)
       for (const item of items) {
-        if (key in item) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const val = (item as any)[key];
-          return val !== undefined ? String(val) : match;
+        const val = getNestedValue(item, key);
+        if (val !== undefined) {
+          return String(val);
         }
       }
     }
