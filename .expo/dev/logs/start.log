@@ -1,0 +1,307 @@
+{"_e":"root:init","_t":1789807507562,"format":"v0-jsonl","version":"57.0.26"}
+{"_e":"env:mode","_t":1789807507563,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1789807507567,"mode":"development","files":["../..\\..\\.env.local"],"env":{"EXPO_PUBLIC_SUPABASE_ANON_KEY":"your-anon-key-here","EXPO_PUBLIC_SUPABASE_URL":"https://your-project.supabase.co"}}
+{"_e":"devserver:start","_t":1789807517423,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1789807526020,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1789807528984,"plugins":[]}
+{"_e":"metro:instantiate","_t":1789807542325,"atlas":false,"workers":10,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1789807595800,"id":"1","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789807595800,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789807595804,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789807596769,"id":"1","progress":0.010000000000000002,"total":1,"current":1}
+{"_e":"metro:bundling:progress","_t":1789807596871,"id":"1","progress":0.09,"total":5,"current":3}
+{"_e":"metro:bundling:progress","_t":1789807596982,"id":"1","progress":0.16000000000000003,"total":10,"current":4}
+{"_e":"metro:bundling:progress","_t":1789807597570,"id":"1","progress":0.25,"total":10,"current":5}
+{"_e":"metro:bundling:progress","_t":1789807597672,"id":"1","progress":0.25,"total":33,"current":14}
+{"_e":"metro:bundling:progress","_t":1789807597774,"id":"1","progress":0.25,"total":59,"current":19}
+{"_e":"metro:bundling:progress","_t":1789807597877,"id":"1","progress":0.25,"total":81,"current":31}
+{"_e":"metro:bundling:progress","_t":1789807597978,"id":"1","progress":0.25,"total":118,"current":43}
+{"_e":"metro:bundling:progress","_t":1789807598079,"id":"1","progress":0.25,"total":167,"current":65}
+{"_e":"metro:bundling:progress","_t":1789807598179,"id":"1","progress":0.27822726723825625,"total":182,"current":96}
+{"_e":"metro:bundling:progress","_t":1789807598283,"id":"1","progress":0.29293761292379633,"total":194,"current":105}
+{"_e":"metro:bundling:progress","_t":1789807598338,"id":"1","progress":0.2985439472845148,"total":194,"current":106}
+{"_e":"metro:bundling:progress","_t":1789807598441,"id":"1","progress":0.2985439472845148,"total":206,"current":112}
+{"_e":"metro:bundling:progress","_t":1789807598541,"id":"1","progress":0.33431414388715436,"total":211,"current":122}
+{"_e":"metro:bundling:progress","_t":1789807598641,"id":"1","progress":0.33431414388715436,"total":336,"current":145}
+{"_e":"metro:bundling:progress","_t":1789807598741,"id":"1","progress":0.33431414388715436,"total":377,"current":175}
+{"_e":"metro:bundling:progress","_t":1789807598847,"id":"1","progress":0.33431414388715436,"total":433,"current":195}
+{"_e":"metro:bundling:progress","_t":1789807598953,"id":"1","progress":0.33431414388715436,"total":434,"current":196}
+{"_e":"metro:bundling:progress","_t":1789807599617,"id":"1","progress":0.33431414388715436,"total":434,"current":197}
+{"_e":"metro:bundling:progress","_t":1789807599724,"id":"1","progress":0.33431414388715436,"total":436,"current":201}
+{"_e":"metro:bundling:progress","_t":1789807600243,"id":"1","progress":0.33431414388715436,"total":436,"current":202}
+{"_e":"metro:bundling:progress","_t":1789807600344,"id":"1","progress":0.33431414388715436,"total":460,"current":211}
+{"_e":"metro:bundling:progress","_t":1789807600444,"id":"1","progress":0.33431414388715436,"total":499,"current":234}
+{"_e":"metro:bundling:progress","_t":1789807600544,"id":"1","progress":0.33431414388715436,"total":521,"current":256}
+{"_e":"metro:bundling:progress","_t":1789807600644,"id":"1","progress":0.33431414388715436,"total":539,"current":276}
+{"_e":"metro:bundling:progress","_t":1789807600746,"id":"1","progress":0.33431414388715436,"total":590,"current":317}
+{"_e":"metro:bundling:progress","_t":1789807600848,"id":"1","progress":0.3564561331371191,"total":608,"current":363}
+{"_e":"metro:bundling:progress","_t":1789807600950,"id":"1","progress":0.38939177267157316,"total":633,"current":395}
+{"_e":"metro:bundling:progress","_t":1789807601051,"id":"1","progress":0.40513036127816576,"total":674,"current":429}
+{"_e":"metro:bundling:progress","_t":1789807601151,"id":"1","progress":0.40513036127816576,"total":743,"current":453}
+{"_e":"metro:bundling:progress","_t":1789807601262,"id":"1","progress":0.40513036127816576,"total":775,"current":465}
+{"_e":"metro:bundling:progress","_t":1789807601319,"id":"1","progress":0.40513036127816576,"total":775,"current":466}
+{"_e":"metro:bundling:progress","_t":1789807601422,"id":"1","progress":0.40513036127816576,"total":775,"current":467}
+{"_e":"metro:bundling:progress","_t":1789807601541,"id":"1","progress":0.40513036127816576,"total":775,"current":471}
+{"_e":"metro:bundling:progress","_t":1789807601653,"id":"1","progress":0.40513036127816576,"total":781,"current":496}
+{"_e":"metro:bundling:progress","_t":1789807601732,"id":"1","progress":0.40513036127816576,"total":781,"current":497}
+{"_e":"metro:bundling:progress","_t":1789807601907,"id":"1","progress":0.4065899295200841,"total":781,"current":498}
+{"_e":"metro:bundling:progress","_t":1789807602020,"id":"1","progress":0.4065899295200841,"total":782,"current":498}
+{"_e":"metro:bundling:progress","_t":1789807602749,"id":"1","progress":0.40718107547700505,"total":782,"current":499}
+{"_e":"metro:bundling:progress","_t":1789807602850,"id":"1","progress":0.415017542046825,"total":787,"current":507}
+{"_e":"metro:bundling:progress","_t":1789807602951,"id":"1","progress":0.43363111601839127,"total":817,"current":538}
+{"_e":"metro:bundling:progress","_t":1789807603055,"id":"1","progress":0.47435456435201484,"total":861,"current":593}
+{"_e":"metro:bundling:progress","_t":1789807603159,"id":"1","progress":0.47435456435201484,"total":902,"current":615}
+{"_e":"metro:bundling:progress","_t":1789807603262,"id":"1","progress":0.5048883384385497,"total":919,"current":653}
+{"_e":"metro:bundling:progress","_t":1789807603363,"id":"1","progress":0.5369485937009769,"total":943,"current":691}
+{"_e":"metro:bundling:progress","_t":1789807603464,"id":"1","progress":0.5855297566464055,"total":954,"current":730}
+{"_e":"metro:bundling:progress","_t":1789807603564,"id":"1","progress":0.6032006930921545,"total":994,"current":772}
+{"_e":"metro:bundling:progress","_t":1789807603665,"id":"1","progress":0.6032006930921545,"total":1005,"current":773}
+{"_e":"metro:bundling:progress","_t":1789807603759,"id":"1","progress":0.6032006930921545,"total":1005,"current":774}
+{"_e":"metro:bundling:progress","_t":1789807603958,"id":"1","progress":0.6032006930921545,"total":1005,"current":775}
+{"_e":"metro:bundling:progress","_t":1789807604071,"id":"1","progress":0.6032006930921545,"total":1011,"current":777}
+{"_e":"metro:bundling:progress","_t":1789807604204,"id":"1","progress":0.6032006930921545,"total":1011,"current":778}
+{"_e":"metro:bundling:progress","_t":1789807604304,"id":"1","progress":0.6032006930921545,"total":2864,"current":780}
+{"_e":"metro:bundling:progress","_t":1789807604437,"id":"1","progress":0.6032006930921545,"total":2864,"current":781}
+{"_e":"metro:bundling:progress","_t":1789807604550,"id":"1","progress":0.6032006930921545,"total":2864,"current":785}
+{"_e":"metro:bundling:progress","_t":1789807604667,"id":"1","progress":0.6032006930921545,"total":2870,"current":787}
+{"_e":"metro:bundling:progress","_t":1789807604768,"id":"1","progress":0.6032006930921545,"total":2871,"current":800}
+{"_e":"metro:bundling:progress","_t":1789807604868,"id":"1","progress":0.6032006930921545,"total":2877,"current":804}
+{"_e":"metro:bundling:progress","_t":1789807604968,"id":"1","progress":0.6032006930921545,"total":2884,"current":805}
+{"_e":"metro:bundling:progress","_t":1789807605073,"id":"1","progress":0.6032006930921545,"total":2887,"current":827}
+{"_e":"metro:bundling:progress","_t":1789807605173,"id":"1","progress":0.6032006930921545,"total":2905,"current":884}
+{"_e":"metro:bundling:progress","_t":1789807605306,"id":"1","progress":0.6032006930921545,"total":2915,"current":915}
+{"_e":"metro:bundling:progress","_t":1789807605405,"id":"1","progress":0.6032006930921545,"total":2939,"current":952}
+{"_e":"metro:bundling:progress","_t":1789807605509,"id":"1","progress":0.6032006930921545,"total":2950,"current":985}
+{"_e":"metro:bundling:progress","_t":1789807605610,"id":"1","progress":0.6032006930921545,"total":2962,"current":1062}
+{"_e":"metro:bundling:progress","_t":1789807605710,"id":"1","progress":0.6032006930921545,"total":2962,"current":1159}
+{"_e":"metro:bundling:progress","_t":1789807605810,"id":"1","progress":0.6032006930921545,"total":2962,"current":1255}
+{"_e":"metro:bundling:progress","_t":1789807605910,"id":"1","progress":0.6032006930921545,"total":2962,"current":1350}
+{"_e":"metro:bundling:progress","_t":1789807606010,"id":"1","progress":0.6032006930921545,"total":2962,"current":1439}
+{"_e":"metro:bundling:progress","_t":1789807606110,"id":"1","progress":0.6032006930921545,"total":2962,"current":1537}
+{"_e":"metro:bundling:progress","_t":1789807606218,"id":"1","progress":0.6032006930921545,"total":2962,"current":1603}
+{"_e":"metro:bundling:progress","_t":1789807606318,"id":"1","progress":0.6032006930921545,"total":2962,"current":1693}
+{"_e":"metro:bundling:progress","_t":1789807606418,"id":"1","progress":0.6032006930921545,"total":2962,"current":1753}
+{"_e":"metro:bundling:progress","_t":1789807606518,"id":"1","progress":0.6032006930921545,"total":2962,"current":1831}
+{"_e":"metro:bundling:progress","_t":1789807606618,"id":"1","progress":0.6032006930921545,"total":2962,"current":1922}
+{"_e":"metro:bundling:progress","_t":1789807606718,"id":"1","progress":0.6032006930921545,"total":2962,"current":2018}
+{"_e":"metro:bundling:progress","_t":1789807606818,"id":"1","progress":0.6032006930921545,"total":2962,"current":2095}
+{"_e":"metro:bundling:progress","_t":1789807606918,"id":"1","progress":0.6032006930921545,"total":2962,"current":2194}
+{"_e":"metro:bundling:progress","_t":1789807607018,"id":"1","progress":0.6032006930921545,"total":2962,"current":2286}
+{"_e":"metro:bundling:progress","_t":1789807607118,"id":"1","progress":0.645087721537859,"total":2962,"current":2379}
+{"_e":"metro:bundling:progress","_t":1789807607219,"id":"1","progress":0.6914467112344935,"total":2962,"current":2463}
+{"_e":"metro:bundling:progress","_t":1789807607319,"id":"1","progress":0.7458147564400024,"total":2962,"current":2558}
+{"_e":"metro:bundling:progress","_t":1789807607420,"id":"1","progress":0.7980122743132572,"total":2962,"current":2646}
+{"_e":"metro:bundling:progress","_t":1789807607520,"id":"1","progress":0.8550941910611157,"total":2962,"current":2739}
+{"_e":"metro:bundling:progress","_t":1789807607620,"id":"1","progress":0.9006407289999231,"total":2962,"current":2811}
+{"_e":"metro:bundling:progress","_t":1789807607720,"id":"1","progress":0.9315771759086833,"total":2987,"current":2883}
+{"_e":"metro:bundling:progress","_t":1789807607820,"id":"1","progress":0.9458238306248333,"total":3022,"current":2939}
+{"_e":"metro:bundling:progress","_t":1789807607922,"id":"1","progress":0.9543886056901155,"total":3034,"current":2964}
+{"_e":"metro:bundling:progress","_t":1789807608236,"id":"1","progress":0.955032701238306,"total":3034,"current":2965}
+{"_e":"metro:bundling:progress","_t":1789807608338,"id":"1","progress":0.9628394543199024,"total":3039,"current":2982}
+{"_e":"metro:bundling:progress","_t":1789807608442,"id":"1","progress":0.9708988954789971,"total":3070,"current":3025}
+{"_e":"metro:bundling:progress","_t":1789807608546,"id":"1","progress":0.9708988954789971,"total":3089,"current":3035}
+{"_e":"metro:bundling:progress","_t":1789807608596,"id":"1","progress":0.9708988954789971,"total":3089,"current":3036}
+{"_e":"metro:bundling:progress","_t":1789807608699,"id":"1","progress":0.9708988954789971,"total":3121,"current":3047}
+{"_e":"metro:bundling:progress","_t":1789807608802,"id":"1","progress":0.9708988954789971,"total":3136,"current":3069}
+{"_e":"metro:bundling:progress","_t":1789807608897,"id":"1","progress":0.9708988954789971,"total":3136,"current":3070}
+{"_e":"metro:bundling:progress","_t":1789807608999,"id":"1","progress":0.9708988954789971,"total":3171,"current":3078}
+{"_e":"metro:bundling:progress","_t":1789807609099,"id":"1","progress":0.9708988954789971,"total":3229,"current":3090}
+{"_e":"metro:bundling:progress","_t":1789807609199,"id":"1","progress":0.9708988954789971,"total":3234,"current":3120}
+{"_e":"metro:bundling:progress","_t":1789807609300,"id":"1","progress":0.9708988954789971,"total":3293,"current":3151}
+{"_e":"metro:bundling:progress","_t":1789807609400,"id":"1","progress":0.9708988954789971,"total":3307,"current":3208}
+{"_e":"metro:bundling:progress","_t":1789807609500,"id":"1","progress":0.9708988954789971,"total":3327,"current":3261}
+{"_e":"metro:bundling:progress","_t":1789807609601,"id":"1","progress":0.978038953973662,"total":3351,"current":3314}
+{"_e":"metro:bundling:progress","_t":1789807609701,"id":"1","progress":0.9887691151941571,"total":3374,"current":3355}
+{"_e":"metro:bundling:failed","_t":1789807609785,"id":"1","message":"Unable to resolve \"expo-linking\" from \"node_modules\\expo-router\\build\\fork\\useLinking.native.js\"\n  36 | exports.useLinking = useLinking;\n  37 | exports.getInitialURLWithTimeout = getInitialURLWithTimeout;\n> 38 | const ExpoLinking = __importStar(require(\"expo-linking\"));\n     |                                           ^\n  39 | const react_1 = require(\"react\");\n  40 | const react_native_1 = require(\"react-native\");\n  41 | const extractPathFromURL_1 = require(\"./extractPathFromURL\");","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\build\\fork\\useLinking.native.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"expo-linking\"\u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\build\\fork\\NavigationContainer.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./useLinking\"\u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\build\\ExpoRoot.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./fork/NavigationContainer\"\u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\build\\qualified-entry.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./ExpoRoot\"\u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\entry-classic.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"expo-router/build/qualified-entry\"\u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\entry.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"expo-router/entry-classic\"\u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./node_modules/\u001b[1mexpo-router\u001b[22m/entry\"\u001b[39m\u001b[90m\u001b[39m\n","filename":null,"targetModuleName":"expo-linking","originModulePath":"node_modules\\expo-router\\build\\fork\\useLinking.native.js"}
+{"_e":"metro:bundling:started","_t":1789807620507,"id":"2","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789807620507,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789807620510,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789807620609,"id":"2","progress":0.06708949207202365,"total":305,"current":79}
+{"_e":"metro:bundling:progress","_t":1789807620709,"id":"2","progress":0.23753793948534263,"total":515,"current":251}
+{"_e":"metro:bundling:progress","_t":1789807620809,"id":"2","progress":0.3555809274510759,"total":758,"current":452}
+{"_e":"metro:bundling:progress","_t":1789807620909,"id":"2","progress":0.5686374341225797,"total":919,"current":693}
+{"_e":"metro:bundling:progress","_t":1789807621009,"id":"2","progress":0.7706427364372705,"total":1048,"current":920}
+{"_e":"metro:bundling:progress","_t":1789807621162,"id":"2","progress":0.7706427364372705,"total":2930,"current":967}
+{"_e":"metro:bundling:progress","_t":1789807621262,"id":"2","progress":0.7706427364372705,"total":2933,"current":970}
+{"_e":"metro:bundling:progress","_t":1789807621372,"id":"2","progress":0.7706427364372705,"total":2933,"current":971}
+{"_e":"metro:bundling:progress","_t":1789807621471,"id":"2","progress":0.7706427364372705,"total":3016,"current":2064}
+{"_e":"metro:bundling:progress","_t":1789807621571,"id":"2","progress":0.9671043426531826,"total":3075,"current":3024}
+{"_e":"metro:bundling:progress","_t":1789807621671,"id":"2","progress":0.9671043426531826,"total":3339,"current":3269}
+{"_e":"metro:bundling:failed","_t":1789807621708,"id":"2","message":"Unable to resolve \"expo-linking\" from \"node_modules\\expo-router\\build\\fork\\useLinking.native.js\"\n  36 | exports.useLinking = useLinking;\n  37 | exports.getInitialURLWithTimeout = getInitialURLWithTimeout;\n> 38 | const ExpoLinking = __importStar(require(\"expo-linking\"));\n     |                                           ^\n  39 | const react_1 = require(\"react\");\n  40 | const react_native_1 = require(\"react-native\");\n  41 | const extractPathFromURL_1 = require(\"./extractPathFromURL\");","importStack":"\u001b[1mImport stack:\u001b[22m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\build\\fork\\useLinking.native.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"expo-linking\"\u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\build\\fork\\NavigationContainer.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./useLinking\"\u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\build\\ExpoRoot.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./fork/NavigationContainer\"\u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\build\\exports.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./ExpoRoot\"\u001b[39m\u001b[90m\u001b[39m\n\u001b[90m\u001b[39m\n\u001b[90m\u001b[90m \u001b[39m\u001b[90mnode_modules\\expo-router\\build\\index.js\u001b[39m\n\u001b[90m\u001b[90m |\u001b[39m\u001b[90m \u001b[36mimport\u001b[39m\u001b[90m \u001b[32m\"./exports\"\u001b[39m\u001b[90m\u001b[39m\n\n\u001b[90m \u001b[39mapp\\(tabs)\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-router\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-linking","originModulePath":"node_modules\\expo-router\\build\\fork\\useLinking.native.js"}
+{"_e":"metro:bundling:started","_t":1789807682215,"id":"3","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789807682215,"id":"3","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789807682218,"id":"3","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789807682318,"id":"3","progress":0.13356236189738874,"total":249,"current":91}
+{"_e":"metro:bundling:progress","_t":1789807682418,"id":"3","progress":0.24893503848409487,"total":469,"current":234}
+{"_e":"metro:bundling:progress","_t":1789807682518,"id":"3","progress":0.33470633621075396,"total":643,"current":372}
+{"_e":"metro:bundling:progress","_t":1789807682618,"id":"3","progress":0.5315766765029459,"total":849,"current":619}
+{"_e":"metro:bundling:progress","_t":1789807682718,"id":"3","progress":0.683801775147929,"total":988,"current":817}
+{"_e":"metro:bundling:progress","_t":1789807682827,"id":"3","progress":0.7686245074122724,"total":1095,"current":960}
+{"_e":"metro:bundling:progress","_t":1789807682949,"id":"3","progress":0.8763802957087906,"total":1159,"current":1085}
+{"_e":"metro:bundling:progress","_t":1789807683048,"id":"3","progress":0.8763802957087906,"total":3038,"current":1124}
+{"_e":"metro:bundling:progress","_t":1789807683267,"id":"3","progress":0.8763802957087906,"total":3038,"current":1125}
+{"_e":"metro:bundling:progress","_t":1789807683366,"id":"3","progress":0.8763802957087906,"total":3048,"current":2653}
+{"_e":"metro:bundling:progress","_t":1789807683466,"id":"3","progress":0.9736523504896216,"total":3167,"current":3125}
+{"_e":"metro:bundling:progress","_t":1789807683566,"id":"3","progress":0.9776082524005486,"total":3375,"current":3337}
+{"_e":"metro:bundling:progress","_t":1789807683678,"id":"3","progress":0.999,"total":3396,"current":3396}
+{"_e":"metro:bundling:done","_t":1789807684178,"id":"3","total":3396,"ms":1962.5644}
+{"_e":"root:init","_t":1789807812739,"format":"v0-jsonl","version":"57.0.26"}
+{"_e":"env:mode","_t":1789807812739,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1789807812743,"mode":"development","files":["../..\\..\\.env.local"],"env":{"EXPO_PUBLIC_SUPABASE_ANON_KEY":"your-anon-key-here","EXPO_PUBLIC_SUPABASE_URL":"https://your-project.supabase.co"}}
+{"_e":"devserver:start","_t":1789807813049,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1789807813377,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1789807813694,"plugins":[]}
+{"_e":"metro:instantiate","_t":1789807820342,"atlas":false,"workers":10,"host":"::","port":8081}
+{"_e":"root:init","_t":1789810137087,"format":"v0-jsonl","version":"57.0.26"}
+{"_e":"env:mode","_t":1789810137087,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1789810137091,"mode":"development","files":["../..\\..\\.env.local"],"env":{"EXPO_PUBLIC_SUPABASE_ANON_KEY":"your-anon-key-here","EXPO_PUBLIC_SUPABASE_URL":"https://your-project.supabase.co"}}
+{"_e":"devserver:start","_t":1789810137388,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1789810137723,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1789810138033,"plugins":[]}
+{"_e":"metro:instantiate","_t":1789810144874,"atlas":false,"workers":10,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1789810158484,"id":"1","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789810158485,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789810158490,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789810158590,"id":"1","progress":0.032575847709696605,"total":205,"current":37}
+{"_e":"metro:bundling:progress","_t":1789810158690,"id":"1","progress":0.13328294280675232,"total":315,"current":115}
+{"_e":"metro:bundling:progress","_t":1789810158790,"id":"1","progress":0.22921542612662302,"total":518,"current":248}
+{"_e":"metro:bundling:progress","_t":1789810158890,"id":"1","progress":0.33576468380559205,"total":730,"current":423}
+{"_e":"metro:bundling:progress","_t":1789810158990,"id":"1","progress":0.35321410123966945,"total":880,"current":523}
+{"_e":"metro:bundling:progress","_t":1789810159090,"id":"1","progress":0.4984418468080363,"total":966,"current":682}
+{"_e":"metro:bundling:progress","_t":1789810159190,"id":"1","progress":0.653588067052389,"total":1018,"current":823}
+{"_e":"metro:bundling:progress","_t":1789810159304,"id":"1","progress":0.7471990807239299,"total":1062,"current":918}
+{"_e":"metro:bundling:progress","_t":1789810159404,"id":"1","progress":0.8387739252329708,"total":1117,"current":1023}
+{"_e":"metro:bundling:progress","_t":1789810159504,"id":"1","progress":0.9081523870208802,"total":1212,"current":1155}
+{"_e":"metro:bundling:progress","_t":1789810159616,"id":"1","progress":0.9498370571073503,"total":1299,"current":1266}
+{"_e":"metro:bundling:progress","_t":1789810159716,"id":"1","progress":0.9788961266302424,"total":1414,"current":1399}
+{"_e":"metro:bundling:progress","_t":1789810159816,"id":"1","progress":0.9873818298349623,"total":1422,"current":1413}
+{"_e":"metro:bundling:progress","_t":1789810159916,"id":"1","progress":0.9873818298349623,"total":1782,"current":1415}
+{"_e":"metro:bundling:progress","_t":1789810160016,"id":"1","progress":0.9873818298349623,"total":3273,"current":1422}
+{"_e":"metro:bundling:progress","_t":1789810160225,"id":"1","progress":0.9873818298349623,"total":3273,"current":1423}
+{"_e":"metro:bundling:progress","_t":1789810160325,"id":"1","progress":0.9873818298349623,"total":3323,"current":3288}
+{"_e":"metro:bundling:done","_t":1789810160473,"id":"1","total":3323,"ms":1988.0794}
+{"_e":"root:init","_t":1789825667766,"format":"v0-jsonl","version":"57.0.26"}
+{"_e":"env:mode","_t":1789825667781,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1789825667800,"mode":"development","files":["../..\\..\\.env.local"],"env":{"EXPO_PUBLIC_SUPABASE_ANON_KEY":"your-anon-key-here","EXPO_PUBLIC_SUPABASE_URL":"https://your-project.supabase.co"}}
+{"_e":"devserver:start","_t":1789825679679,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1789825687578,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1789825693845,"plugins":[]}
+{"_e":"metro:instantiate","_t":1789825703868,"atlas":false,"workers":10,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1789825738096,"id":"1","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789825738096,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789825738099,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789825738202,"id":"1","progress":0.0625,"total":248,"current":62}
+{"_e":"metro:bundling:progress","_t":1789825738302,"id":"1","progress":0.32621671597633134,"total":520,"current":297}
+{"_e":"metro:bundling:progress","_t":1789825738402,"id":"1","progress":0.5143352719110295,"total":792,"current":568}
+{"_e":"metro:bundling:progress","_t":1789825738502,"id":"1","progress":0.6225532738305597,"total":929,"current":733}
+{"_e":"metro:bundling:progress","_t":1789825738602,"id":"1","progress":0.9024102949581847,"total":1059,"current":1006}
+{"_e":"metro:bundling:progress","_t":1789825738702,"id":"1","progress":0.9495302340399873,"total":1291,"current":1258}
+{"_e":"metro:bundling:progress","_t":1789825738802,"id":"1","progress":0.984756320653488,"total":1307,"current":1297}
+{"_e":"metro:bundling:progress","_t":1789825738912,"id":"1","progress":0.9984726997264632,"total":1309,"current":1308}
+{"_e":"metro:bundling:progress","_t":1789825738975,"id":"1","progress":0.999,"total":1309,"current":1309}
+{"_e":"metro:bundling:progress","_t":1789825739080,"id":"1","progress":0.999,"total":1416,"current":1412}
+{"_e":"metro:bundling:progress","_t":1789825739195,"id":"1","progress":0.999,"total":1419,"current":1414}
+{"_e":"metro:bundling:progress","_t":1789825739492,"id":"1","progress":0.999,"total":1419,"current":1415}
+{"_e":"metro:bundling:progress","_t":1789825739618,"id":"1","progress":0.999,"total":3271,"current":1417}
+{"_e":"metro:bundling:progress","_t":1789825739719,"id":"1","progress":0.999,"total":3276,"current":1420}
+{"_e":"metro:bundling:progress","_t":1789825739822,"id":"1","progress":0.999,"total":3276,"current":1421}
+{"_e":"metro:bundling:progress","_t":1789825739922,"id":"1","progress":0.999,"total":3385,"current":3293}
+{"_e":"metro:bundling:progress","_t":1789825740024,"id":"1","progress":0.999,"total":3419,"current":3408}
+{"_e":"metro:bundling:progress","_t":1789825740135,"id":"1","progress":0.999,"total":3435,"current":3417}
+{"_e":"metro:bundling:progress","_t":1789825740171,"id":"1","progress":0.999,"total":3435,"current":3418}
+{"_e":"metro:bundling:progress","_t":1789825740277,"id":"1","progress":0.999,"total":3525,"current":3426}
+{"_e":"metro:bundling:progress","_t":1789825740324,"id":"1","progress":0.999,"total":3525,"current":3427}
+{"_e":"metro:bundling:progress","_t":1789825740427,"id":"1","progress":0.999,"total":3525,"current":3429}
+{"_e":"metro:bundling:progress","_t":1789825740613,"id":"1","progress":0.999,"total":3525,"current":3430}
+{"_e":"metro:bundling:progress","_t":1789825740712,"id":"1","progress":0.999,"total":3526,"current":3433}
+{"_e":"metro:bundling:progress","_t":1789825740882,"id":"1","progress":0.999,"total":3526,"current":3434}
+{"_e":"metro:bundling:progress","_t":1789825740982,"id":"1","progress":0.999,"total":3526,"current":3449}
+{"_e":"metro:bundling:progress","_t":1789825741083,"id":"1","progress":0.999,"total":3526,"current":3468}
+{"_e":"metro:bundling:progress","_t":1789825741183,"id":"1","progress":0.999,"total":3526,"current":3495}
+{"_e":"metro:bundling:progress","_t":1789825741283,"id":"1","progress":0.999,"total":3527,"current":3518}
+{"_e":"metro:bundling:progress","_t":1789825741389,"id":"1","progress":0.999,"total":3528,"current":3527}
+{"_e":"metro:bundling:progress","_t":1789825741489,"id":"1","progress":0.999,"total":3528,"current":3528}
+{"_e":"metro:bundling:done","_t":1789825741711,"id":"1","total":3528,"ms":3615.236}
+{"_e":"metro:client_log","_t":1789825748893,"level":"warn","data":["Require cycle: src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/definition.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789825748953,"level":"warn","data":["Require cycle: src/widgets/declarative/validation.ts -> src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/validation.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789825748994,"level":"warn","data":["Require cycle: src/renderer/declarative/elements/ContainerView.tsx -> src/renderer/declarative/ElementRenderer.tsx -> src/renderer/declarative/elements/ContainerView.tsx\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789825749301,"level":"error","data":["Can't perform a React state update on a component that hasn't mounted yet. This indicates that you have a side-effect in your render function that asynchronously tries to update the component. Move this work to useEffect instead.","\n\n\u001b[1mCall Stack\u001b[22m\n\u001b[2m\u001b[90m  apply (<native>)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  NamelessError (node_modules\\@expo\\metro-runtime\\src\\metroServerLogs.native.ts:105)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  captureCurrentStack (node_modules\\@expo\\metro-runtime\\src\\metroServerLogs.native.ts:110:27)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  HMRClient.log (node_modules\\@expo\\metro-runtime\\src\\metroServerLogs.native.ts:42:79)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  console.level (node_modules\\react-native\\Libraries\\Core\\setUpDeveloperTools.js:41:24)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  runWithFiberInDEV$argument_1 (node_modules\\react-native\\Libraries\\Renderer\\implementations\\ReactFabric-dev.js:15178:26)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  run (<native>)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  runWithFiberInDEV (node_modules\\react-native\\Libraries\\Renderer\\implementations\\ReactFabric-dev.js:697:33)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  warnAboutUpdateOnNotYetMountedFiberInDEV (node_modules\\react-native\\Libraries\\Renderer\\implementations\\ReactFabric-dev.js:15177:28)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  getRootForUpdatedFiber (node_modules\\react-native\\Libraries\\Renderer\\implementations\\ReactFabric-dev.js:5123:51)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  enqueueConcurrentHookUpdate (node_modules\\react-native\\Libraries\\Renderer\\implementations\\ReactFabric-dev.js:5067:36)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  dispatchSetStateInternal (node_modules\\react-native\\Libraries\\Renderer\\implementations\\ReactFabric-dev.js:6991:45)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  dispatchSetState (node_modules\\react-native\\Libraries\\Renderer\\implementations\\ReactFabric-dev.js:6951:31)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  url.then$argument_0 (node_modules\\expo-router\\build\\fork\\useLinking.native.js:127:47)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  tryCallOne (address at (InternalBytecode.js:1:1296)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  anonymous (address at (InternalBytecode.js:1:4984)\u001b[39m\u001b[22m","\n\n\u001b[1mCode: ExpoRoot.js\u001b[22m\n\u001b[2m(\u001b[22m\u001b[0mC:\\Users\\kumar\\m\\WidgeBuddy\\node_modules\\expo-router\\build\\ExpoRoot.js\u001b[0m\u001b[2m:135:120)\u001b[22m\n\n\u001b[2m...\u001b[22mm\u001b[39m\u001b[90m 135 |\u001b[39m     \u001b[36mreturn\u001b[39m ((\u001b[35m0\u001b[39m\u001b[33m,\u001b[39m jsx_runtime_1\u001b[33m.\u001b[39mjsx)(st\u001b[2m...\u001b[22m\n                                                    \u001b[0m^\u001b[0m\n\u001b[2m(error truncated)\u001b[22m\n\u001b[1mCall Stack\u001b[22m\n\u001b[2m\u001b[90m  ContextNavigator (node_modules\\expo-router\\build\\ExpoRoot.js:135:121)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  ExpoRoot (node_modules\\expo-router\\build\\ExpoRoot.js:85:33)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  App (node_modules\\expo-router\\build\\qualified-entry.js:20:91)\u001b[39m\u001b[22m\n\u001b[2m\u001b[90m  WithDevTools (node_modules\\expo\\src\\launch\\withDevTools.tsx:21:12)\u001b[39m\u001b[22m"]}
+{"_e":"metro:bundling:started","_t":1789825905260,"id":"7","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789825905260,"id":"7","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1789825905317,"id":"7","total":1,"ms":56.228}
+{"_e":"metro:client_log","_t":1789825912698,"level":"warn","data":["Require cycle: src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/definition.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789825912752,"level":"warn","data":["Require cycle: src/widgets/declarative/validation.ts -> src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/validation.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789825912799,"level":"warn","data":["Require cycle: src/renderer/declarative/elements/ContainerView.tsx -> src/renderer/declarative/ElementRenderer.tsx -> src/renderer/declarative/elements/ContainerView.tsx\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"root:init","_t":1789827227466,"format":"v0-jsonl","version":"57.0.26"}
+{"_e":"env:mode","_t":1789827227466,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1789827227469,"mode":"development","files":["../..\\..\\.env.local"],"env":{"EXPO_PUBLIC_SUPABASE_ANON_KEY":"your-anon-key-here","EXPO_PUBLIC_SUPABASE_URL":"https://your-project.supabase.co"}}
+{"_e":"devserver:start","_t":1789827227678,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1789827227903,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1789827228083,"plugins":[]}
+{"_e":"metro:instantiate","_t":1789827233009,"atlas":false,"workers":10,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1789827369288,"id":"2","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789827369288,"id":"2","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1789827370201,"id":"2","total":1,"ms":913.1762}
+{"_e":"metro:client_log","_t":1789827379100,"level":"warn","data":["Require cycle: src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/definition.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789827379101,"level":"warn","data":["Require cycle: src/widgets/declarative/validation.ts -> src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/validation.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789827379103,"level":"warn","data":["Require cycle: src/renderer/declarative/elements/ContainerView.tsx -> src/renderer/declarative/ElementRenderer.tsx -> src/renderer/declarative/elements/ContainerView.tsx\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:bundling:started","_t":1789828174241,"id":"5","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789828174241,"id":"5","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1789828175250,"id":"5","total":1,"ms":1008.9031}
+{"_e":"metro:client_log","_t":1789828184197,"level":"warn","data":["Require cycle: src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/definition.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789828184198,"level":"warn","data":["Require cycle: src/widgets/declarative/validation.ts -> src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/validation.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789828184198,"level":"warn","data":["Require cycle: src/renderer/declarative/elements/ContainerView.tsx -> src/renderer/declarative/ElementRenderer.tsx -> src/renderer/declarative/elements/ContainerView.tsx\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:bundling:started","_t":1789828450182,"id":"8","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789828450182,"id":"8","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1789828450250,"id":"8","total":1,"ms":67.3359}
+{"_e":"metro:client_log","_t":1789828457946,"level":"warn","data":["Require cycle: src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/definition.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789828457946,"level":"warn","data":["Require cycle: src/widgets/declarative/validation.ts -> src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/validation.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789828457946,"level":"warn","data":["Require cycle: src/renderer/declarative/elements/ContainerView.tsx -> src/renderer/declarative/ElementRenderer.tsx -> src/renderer/declarative/elements/ContainerView.tsx\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:bundling:failed","_t":1789828778436,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828778603,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828797363,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828818325,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828835175,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828847106,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828863116,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828876075,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828889036,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828890167,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828899264,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:failed","_t":1789828899335,"id":null,"message":"Unable to resolve \"expo-status-bar\" from \"app\\_layout.tsx\"\n  2 | import { QueryClientProvider } from '@tanstack/react-query';\n  3 | import { Slot } from 'expo-router';\n> 4 | import { StatusBar } from 'expo-status-bar';\n    |                            ^\n  5 | import { queryClient } from '@/services/queryClient';\n  6 | import { useThemeStore } from '@/store/themeStore';\n  7 |","importStack":"\u001b[1mImport stack:\u001b[22m\n\n\u001b[90m \u001b[39mapp\\_layout.tsx\n\u001b[90m |\u001b[39m \u001b[36mimport\u001b[39m \u001b[32m\"expo-status-bar\"\u001b[39m\n\n\u001b[90m \u001b[39mapp\u001b[2m (require.context)\u001b[22m\n","filename":null,"targetModuleName":"expo-status-bar","originModulePath":"app\\_layout.tsx"}
+{"_e":"metro:bundling:started","_t":1789829060441,"id":"a","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789829060442,"id":"a","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1789829060499,"id":"a","total":1,"ms":57.6138}
+{"_e":"metro:client_log","_t":1789829068405,"level":"warn","data":["Require cycle: src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/definition.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789829068410,"level":"warn","data":["Require cycle: src/widgets/declarative/validation.ts -> src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/validation.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789829068410,"level":"warn","data":["Require cycle: src/renderer/declarative/elements/ContainerView.tsx -> src/renderer/declarative/ElementRenderer.tsx -> src/renderer/declarative/elements/ContainerView.tsx\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:bundling:started","_t":1789829127420,"id":"c","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789829127421,"id":"c","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:done","_t":1789829127646,"id":"c","total":1,"ms":225.7937}
+{"_e":"metro:client_log","_t":1789829135272,"level":"warn","data":["Require cycle: src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/definition.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789829135276,"level":"warn","data":["Require cycle: src/widgets/declarative/validation.ts -> src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/validation.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789829135276,"level":"warn","data":["Require cycle: src/renderer/declarative/elements/ContainerView.tsx -> src/renderer/declarative/ElementRenderer.tsx -> src/renderer/declarative/elements/ContainerView.tsx\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"root:init","_t":1789830480382,"format":"v0-jsonl","version":"57.0.26"}
+{"_e":"env:mode","_t":1789830480382,"nodeEnv":"development","babelEnv":"development","mode":"development"}
+{"_e":"env:load","_t":1789830480385,"mode":"development","files":["../..\\..\\.env.local"],"env":{"EXPO_PUBLIC_SUPABASE_ANON_KEY":"your-anon-key-here","EXPO_PUBLIC_SUPABASE_URL":"https://your-project.supabase.co"}}
+{"_e":"devserver:start","_t":1789830480588,"mode":"development","web":true,"baseUrl":"","asyncRoutes":false,"routerRoot":"../..\\..\\app","serverComponents":false,"serverActions":false,"serverRendering":false,"apiRoutes":false,"exporting":false}
+{"_e":"metro:config","_t":1789830480812,"serverRoot":"../..\\..","projectRoot":"../..\\..","exporting":false,"flags":{"autolinkingModuleResolution":false,"serverActions":false,"serverComponents":false,"reactCompiler":false,"optimizeGraph":false,"treeshaking":false,"logbox":false}}
+{"_e":"expo:dev-tools-plugin:load","_t":1789830481000,"plugins":[]}
+{"_e":"metro:instantiate","_t":1789830485984,"atlas":false,"workers":10,"host":"::","port":8081}
+{"_e":"metro:bundling:started","_t":1789830500813,"id":"1","platform":"android","environment":null,"entry":"node_modules\\expo-router\\entry.js"}
+{"_e":"metro:bundling:progress","_t":1789830500813,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789830500817,"id":"1","progress":0,"total":1,"current":0}
+{"_e":"metro:bundling:progress","_t":1789830500916,"id":"1","progress":0.10288358846564613,"total":265,"current":85}
+{"_e":"metro:bundling:progress","_t":1789830501016,"id":"1","progress":0.32405690439241125,"total":527,"current":300}
+{"_e":"metro:bundling:progress","_t":1789830501116,"id":"1","progress":0.47916239377532355,"total":835,"current":578}
+{"_e":"metro:bundling:progress","_t":1789830501216,"id":"1","progress":0.6789266226206007,"total":1068,"current":880}
+{"_e":"metro:bundling:progress","_t":1789830501333,"id":"1","progress":0.8319882355000788,"total":1195,"current":1090}
+{"_e":"metro:bundling:progress","_t":1789830501435,"id":"1","progress":0.8319882355000788,"total":3052,"current":1103}
+{"_e":"metro:bundling:progress","_t":1789830501607,"id":"1","progress":0.8319882355000788,"total":3052,"current":1104}
+{"_e":"metro:bundling:progress","_t":1789830501707,"id":"1","progress":0.8319882355000788,"total":3196,"current":1946}
+{"_e":"metro:bundling:progress","_t":1789830501807,"id":"1","progress":0.9631061771629537,"total":3276,"current":3215}
+{"_e":"metro:bundling:progress","_t":1789830501907,"id":"1","progress":0.9703720204945421,"total":3551,"current":3498}
+{"_e":"metro:bundling:done","_t":1789830502018,"id":"1","total":3551,"ms":1205.2609}
+{"_e":"metro:client_log","_t":1789830510277,"level":"warn","data":["Require cycle: src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/definition.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789830510277,"level":"warn","data":["Require cycle: src/widgets/declarative/validation.ts -> src/widgets/declarative/definition.ts -> src/widgets/schema.ts -> src/widgets/declarative/index.ts -> src/widgets/declarative/validation.ts\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}
+{"_e":"metro:client_log","_t":1789830510277,"level":"warn","data":["Require cycle: src/renderer/declarative/elements/ContainerView.tsx -> src/renderer/declarative/ElementRenderer.tsx -> src/renderer/declarative/elements/ContainerView.tsx\n\nRequire cycles are allowed, but can result in uninitialized values. Consider refactoring to remove the need for a cycle."]}

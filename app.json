@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "WidgeBuddy",
+    "slug": "widgebuddy",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "widgebuddy",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.widgebuddy.app",
+      "entitlements": {
+        "com.apple.security.application-groups": [
+          "group.com.widgebuddy.app"
+        ]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.widgebuddy.app"
+    },
+    "plugins": [
+      "expo-router",
+      "./plugins/withAndroidWidget.js"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
